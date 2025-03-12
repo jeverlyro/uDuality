@@ -6,11 +6,9 @@
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
@@ -93,9 +91,43 @@ a.secondary {
 }
 
 .footer {
-  grid-row-start: 3;
+  margin-top: auto;
+  padding: 3rem 0 1.5rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerBrand h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footerLinks,
+.footerContact {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+}
+
+.footerLinks h4,
+.footerContact h4 {
+  margin-bottom: 1rem;
+  font-family: var(--font-geist-mono);
+}
+
+.footerLinks a,
+.footerContact a {
+  margin-bottom: 0.5rem;
+}
+
+.footerBottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--glass-border);
 }
 
 .footer a {
@@ -161,8 +193,329 @@ a.secondary {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: "white";
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navLinks a {
+  position: relative;
+}
+
+.navLinks a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.navLinks a:hover:after {
+  width: 100%;
+}
+
+.navCta {
+  padding: 0.5rem 1rem;
+  background: var(--accent-color);
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  background-image: url('/hero-bg.jpg'); /* You'll need to add this image */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 3rem;
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.heroCtas {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* About Section */
+.about {
+  position: relative;
+  overflow: hidden;
+}
+
+.aboutContent {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.aboutText p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* Members Section */
+.membersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.memberCard {
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.memberCard:hover {
+  transform: translateY(-5px);
+}
+
+.memberImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0 auto 1.5rem;
+}
+
+.memberName {
+  font-family: var(--font-geist-mono);
+  margin-bottom: 0.5rem;
+}
+
+.memberRole {
+  opacity: 0.7;
+}
+
+/* Gallery Section */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.galleryItem {
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover {
+  transform: scale(1.02);
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.galleryCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+/* Projects Section */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.projectTitle {
+  font-family: var(--font-geist-mono);
+  margin-bottom: 0.8rem;
+}
+
+.projectDescription {
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+.projectLink {
+  align-self: flex-start;
+  font-family: var(--font-geist-mono);
+}
+
+/* FAQ Section */
+.faqContainer {
+  padding: 2rem;
+}
+
+.faqItem {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+}
+
+.faqQuestion {
+  font-family: var(--font-geist-mono);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.faqAnswer {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Shop Section */
+.shopGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.shopItem {
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.shopItem:hover {
+  transform: translateY(-5px);
+}
+
+.shopItemImage {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.shopItemName {
+  font-family: var(--font-geist-mono);
+  margin-bottom: 0.5rem;
+}
+
+.shopItemPrice {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.shopButton {
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+  
+  .heroTitle {
+    font-size: 3rem;
+  }
+  
+  .aboutContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .heroCtas {
+    flex-direction: column;
   }
 }
