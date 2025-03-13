@@ -1,28 +1,63 @@
+/* Define CSS variables for light/dark mode with black and white focus */
+:root {
+  /* Light mode defaults */
+  --background: #ffffff;
+  --foreground: #000000;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --text-muted: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --separator: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+  --hero-gradient: linear-gradient(45deg, #000000, #333333);
+  /* Add missing light mode button variables */
+  --button-primary-hover: rgba(0, 0, 0, 0.8);
+  --button-secondary-hover: rgba(0, 0, 0, 0.05);
+  /* Add these light mode variables */
+  --accent-rgb: 0, 0, 0;
+  --primary-rgb: 0, 0, 0;
+  --secondary-rgb: 100, 100, 100;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 245, 245, 245;
+  --foreground-rgb: 0, 0, 0;
+  --accent-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --glass-bg: rgba(0, 0, 0, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --card-bg: rgba(15, 15, 15, 0.9);
+    --separator: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    --hero-gradient: linear-gradient(45deg, #ffffff, #cccccc);
+    /* RGB values for other components */
+    --accent-rgb: 255, 255, 255;
+    --primary-rgb: 255, 255, 255;
+    --secondary-rgb: 200, 200, 200;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 15, 15, 15;
+    --foreground-rgb: 255, 255, 255;
+    /* Dark mode button variables */
+    --button-primary-hover: rgb(255, 255, 255);
+    --button-secondary-hover: rgba(255, 255, 255, 0.05);
+    --accent-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
 .page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
+  --page-padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 80px;
-  gap: 64px;
+  gap: 0;
   font-family: var(--font-geist-sans);
-}
-
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
+  padding-top: 60px; 
+  margin: 0;
 }
 
 .main {
@@ -33,7 +68,7 @@
 }
 
 .main ol {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
   padding-left: 0;
   margin: 0;
   font-size: 14px;
@@ -86,25 +121,34 @@ a.primary {
 }
 
 a.secondary {
-  border-color: var(--gray-alpha-200);
+  border-color: var(--glass-border);
+  background: transparent;
+  color: var(--foreground);
   min-width: 158px;
 }
 
 .footer {
   margin-top: auto;
   padding: 3rem 0 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  display: none;
 }
 
 .footerGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  margin-bottom: 2rem;
+  padding: 2rem 0;
 }
 
 .footerBrand h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  font-family: var(--font-geist-sans);
 }
 
 .footerLinks,
@@ -116,7 +160,7 @@ a.secondary {
 .footerLinks h4,
 .footerContact h4 {
   margin-bottom: 1rem;
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
 }
 
 .footerLinks a,
@@ -125,9 +169,17 @@ a.secondary {
 }
 
 .footerBottom {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(var(--foreground-rgb), 0.1);
+  font-size: 0.9rem;
+}
+
+.footerBottomLinks {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .footer a {
@@ -140,6 +192,106 @@ a.secondary {
   flex-shrink: 0;
 }
 
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.socialIcons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(var(--background-start-rgb), 0.1);
+  transition: all 0.2s ease;
+}
+
+.socialIcons a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .socialIcons a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.footerContactLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linkIndicator {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.footerContactLink:hover .linkIndicator {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.newsletterForm input {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--foreground-rgb), 0.2);
+  background: rgba(var(--background-end-rgb), 0.5);
+  color: var(--foreground);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.newsletterForm input:focus {
+  border-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .newsletterForm input:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .statusError {
+    color: #f44336; /* Lighter red for better visibility in dark mode */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .inputWrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .subscribeButton {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
@@ -149,7 +301,7 @@ a.secondary {
 
   a.secondary:hover {
     background: var(--button-secondary-hover);
-    border-color: transparent;
+    border-color: var(--glass-border);
   }
 
   .footer a:hover {
@@ -198,6 +350,8 @@ a.secondary {
   margin: 0 auto;
   padding: 0 2rem;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 /* Navigation */
@@ -225,7 +379,8 @@ a.secondary {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: "white";
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
 }
 
 .navLinks {
@@ -245,7 +400,7 @@ a.secondary {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: var(--accent-color);
+  background-color: var(--foreground);
   transition: width 0.3s ease;
 }
 
@@ -262,58 +417,271 @@ a.secondary {
 
 /* Hero Section */
 .hero {
-  height: 100vh;
+  position: relative;
+  min-height: calc(100vh - 60px); /* Take full height minus navbar */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1rem;
-  background-image: url('/hero-bg.jpg'); /* You'll need to add this image */
-  background-size: cover;
-  background-position: center;
-  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 0;
 }
 
-.hero::after {
-  content: '';
+.heroBackground {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom, 
+    rgba(var(--background-start-rgb), 0.7),
+    rgba(var(--background-end-rgb), 0.9)
+  );
+}
+
+.heroShape,
+.heroShape2 {
+  display: none;
 }
 
 .heroContent {
-  position: relative;
-  z-index: 2;
-  text-align: center;
   padding: 3rem;
-  max-width: 800px;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: calc(100% - 4rem);
+  max-width: 1200px;
+  margin: 0 2rem;
+  z-index: 10;
+}
+
+.heroTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .heroTitle {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: -1px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  /* Fallback color in case gradient doesn't work */
+  color: var(--foreground);
+  /* Light mode gradient */
+  background-image: var(--hero-gradient);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Add this to help with rendering */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  font-family: var(--font-geist-sans);
+}
+
+.heroTitleHighlight {
+  position: relative;
+  display: inline-block;
+  /* Remove the inheritance of the parent's transparent text color for this element */
+  -webkit-text-fill-color: initial;
+  /* Use normal text color */
+  color: var(--foreground);
+}
+
+.heroTitleHighlight::after {
+  content: '';
+  position: absolute;
+  height: 8px;
+  width: 100%;
+  bottom: 5px;
+  left: 0;
+  z-index: -1;
 }
 
 .heroSubtitle {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-family: var(--font-geist-sans);
   opacity: 0.9;
+  color: var(--text-muted);
+}
+
+.heroDescription {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  max-width: 90%;
 }
 
 .heroCtas {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
+}
+
+.heroButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.heroButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--foreground);
+}
+
+.heroImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  background-image: url('/hero-image.jpg'); /* Add a placeholder image */
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.heroImage:hover {
+  transform: scale(1.02);
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: bounce 2s infinite;
+  opacity: 0.7;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive styles for hero section */
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 2rem;
+    gap: 2rem;
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+  }
+  
+  .heroDescription {
+    max-width: 100%;
+  }
+  
+  .heroCtas {
+    justify-content: center;
+  }
+  
+  .heroImage {
+    height: 220px;
+  }
+  
+  .scrollIndicator {
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 1rem 0;
+  }
+  
+  .heroContent {
+    padding: 1.25rem;
+    gap: 1.25rem;
+    width: calc(100% - 1.5rem);
+    margin: 0 0.75rem;
+  }
+  
+  .heroCtas {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .heroButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .heroImage {
+    height: 180px;
+  }
+  
+  .heroShape, .heroShape2 {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .heroTitle {
+    /* Dark mode gradient */
+    background-image: linear-gradient(45deg, rgba(var(--foreground-rgb), 1), rgba(var(--accent-rgb), 1));
+  }
 }
 
 /* About Section */
 .about {
   position: relative;
   overflow: hidden;
+}
+
+.about::before,
+.about::after {
+  display: none;
 }
 
 .aboutContent {
@@ -328,7 +696,7 @@ a.secondary {
   line-height: 1.8;
 }
 
-/* Members Section */
+/* Members Section - Updated to match Shop styling */
 .membersGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -338,28 +706,60 @@ a.secondary {
 .memberCard {
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
 }
 
 .memberCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.memberImageContainer {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(var(--foreground-rgb), 0.1);
 }
 
 .memberImage {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 0 auto 1.5rem;
+  transition: transform 0.3s ease;
+  background-color: rgba(var(--foreground-rgb), 0.1);
+}
+
+.memberCard:hover .memberImage {
+  transform: scale(1.05);
 }
 
 .memberName {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
   margin-bottom: 0.5rem;
+  color: var(--foreground);
+  transition: color 0.3s ease;
 }
 
 .memberRole {
-  opacity: 0.7;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .memberCard:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .memberImageContainer {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Gallery Section */
@@ -374,6 +774,7 @@ a.secondary {
   position: relative;
   height: 250px;
   transition: transform 0.3s ease;
+  background: var(--card-bg);
 }
 
 .galleryItem:hover {
@@ -392,7 +793,7 @@ a.secondary {
   left: 0;
   right: 0;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
 }
 
@@ -409,6 +810,7 @@ a.secondary {
   flex-direction: column;
   height: 100%;
   transition: transform 0.3s ease;
+  background: var(--card-bg);
 }
 
 .projectCard:hover {
@@ -423,7 +825,7 @@ a.secondary {
 }
 
 .projectTitle {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
   margin-bottom: 0.8rem;
 }
 
@@ -431,21 +833,33 @@ a.secondary {
   margin-bottom: 1.5rem;
   flex-grow: 1;
   line-height: 1.6;
+  color: var(--text-muted);
 }
 
 .projectLink {
   align-self: flex-start;
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
 }
 
-/* FAQ Section */
+.projectLink:hover {
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+/* FAQ Section - Updated to match Shop styling */
 .faqContainer {
   padding: 2rem;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
 .faqItem {
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
 }
 
 .faqItem:last-child {
@@ -453,14 +867,17 @@ a.secondary {
 }
 
 .faqQuestion {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
   margin-bottom: 0.8rem;
   font-size: 1.2rem;
+  color: var(--foreground);
+  transition: color 0.3s ease;
 }
 
 .faqAnswer {
   line-height: 1.6;
-  opacity: 0.9;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
 }
 
 /* Shop Section */
@@ -474,6 +891,7 @@ a.secondary {
   padding: 1.5rem;
   text-align: center;
   transition: transform 0.3s ease;
+  background: var(--card-bg);
 }
 
 .shopItem:hover {
@@ -488,7 +906,7 @@ a.secondary {
 }
 
 .shopItemName {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-geist-sans);
   margin-bottom: 0.5rem;
 }
 
@@ -501,21 +919,384 @@ a.secondary {
   width: 100%;
 }
 
+.shopButton:hover {
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .page {
+    --page-padding: 32px; /* Update the variable for smaller screens */
+    padding: var(--page-padding);
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 1rem 0;
+  }
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
+
   .navLinks {
     display: none;
+  }
+  
+  .heroContent {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
   
   .heroTitle {
     font-size: 3rem;
   }
   
+  .heroDescription {
+    max-width: 100%;
+  }
+  
+  .heroCtas {
+    justify-content: center;
+  }
+  
   .aboutContent {
     grid-template-columns: 1fr;
   }
   
-  .heroCtas {
+  .footerBottom {
     flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .footerGrid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .socialIcons {
+    justify-content: center;
+  }
+}
+
+/* For headings */
+.section-title {
+  font-family: var(--font-geist-sans);
+}
+
+/* Add these styles for the sidebar navigation */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px; 
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: var(--glass-shadow); /* Lighter shadow for better light mode appearance */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: var(--glass-bg); /* Slightly more opaque for better readability */
+  border-bottom: 1px solid var(--glass-border); /* Subtle border */
+}
+
+.sidebarContent {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: row; /* Changed to row */
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.sidebar .logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--foreground); /* Explicit color to ensure visibility */
+}
+
+.sidebar .navLinks {
+  display: flex;
+  flex-direction: row; /* Changed to row */
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.sidebar .navLinks a {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground); /* Ensure text color matches theme */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebar .navLinks a svg {
+  min-width: 20px;
+}
+
+.sidebar .navLinks a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--foreground);
+  transition: width 0.3s ease;
+}
+
+.sidebar .navLinks a:hover:after {
+  width: 100%;
+}
+
+.sidebar .navCta {
+  padding: 0.5rem 0.75rem; /* Match other links */
+  background: transparent; /* Remove background */
+  border-radius: 0; /* Remove border radius */
+  color: var(--foreground); /* Use theme color */
+}
+
+.sidebar .navCta:hover {
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+.themeToggle {
+  margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust the page layout for the top navbar */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Remove gap between sections */
+  transition: padding 0.3s ease;
+  padding: var(--page-padding);
+  padding-top: calc(60px + var(--page-padding)); /* Account for navbar height */
+}
+
+/* Remove the sidebar-specific padding classes since we're using a top navbar now */
+.withSidebar, .withClosedSidebar {
+  padding: var(--page-padding);
+  padding-top: calc(60px + var(--page-padding));
+}
+
+/* Mobile navigation styles */
+@media (max-width: 768px) {
+  .sidebar {
+    top: auto; /* Remove from top */
+    bottom: 0; /* Position at bottom */
+    height: 60px;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: none;
+    background: var(--glass-bg);
+  }
+  
+  .sidebarContent {
+    padding: 0 1rem;
+  }
+  
+  .sidebar .logoContainer {
+    display: none; /* Hide logo on mobile bottom bar */
+  }
+  
+  .sidebar .navLinks {
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .sidebar .navLinks a {
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  .sidebar .navLinks a span {
+    font-size: 0.7rem;
+  }
+  
+  .themeToggle {
+    display: none; /* Hide theme toggle on mobile */
+  }
+  
+  /* Adjust page padding for bottom navbar */
+  .page {
+    padding-top: var(--page-padding);
+    padding-bottom: calc(60px + var(--page-padding)); /* Account for navbar height */
+  }
+  
+  .withSidebar, .withClosedSidebar {
+    padding-top: var(--page-padding);
+    padding-bottom: calc(60px + var(--page-padding));
+  }
+
+  /* Hero section bottom margin */
+  .hero {
+    margin-bottom: 0;
+  }
+
+  /* Footer padding */
+  .footer {
+    padding-bottom: calc(3rem + 60px);
+  }
+}
+
+/* Remove the toggle button as it's no longer needed */
+.sidebarToggle {
+  display: none;
+}
+
+/* Section background styles */
+.section {
+  position: relative;
+  padding: 5rem 0; /* Remove horizontal padding to allow container to handle it */
+  overflow: hidden;
+  width: 100%;
+  margin-top: -1px; /* Prevent tiny gaps between sections */
+  margin-bottom: -1px;
+}
+
+.section::before,
+.section::after {
+  display: none; /* Remove all background shapes */
+}
+
+/* About section styling */
+.about {
+  position: relative;
+}
+
+.about::before,
+.about::after {
+  display: none;
+}
+
+/* Members section styling */
+.members {
+  position: relative;
+}
+
+.members::before,
+.members::after {
+  display: none;
+}
+
+/* Gallery section styling */
+.gallery {
+  position: relative;
+}
+
+.gallery::before,
+.gallery::after {
+  display: none;
+}
+
+/* Projects section styling */
+.projects {
+  position: relative;
+}
+
+.projects::before,
+.projects::after {
+  display: none;
+}
+
+/* FAQ section styling */
+.faq {
+  position: relative;
+}
+
+.faq::before,
+.faq::after {
+  display: none;
+}
+
+/* Improve glass effect for all sections */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  color: var(--foreground);
+}
+
+/* Smooth transitions between sections with overlapping content */
+.aboutContent, 
+.faqContainer, 
+.membersGrid, 
+.galleryGrid, 
+.projectsGrid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Create section separators that don't add extra space */
+.sectionSeparator {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(var(--foreground-rgb), 0),
+    rgba(var(--foreground-rgb), 0.1),
+    rgba(var(--foreground-rgb), 0)
+  );
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 3;
+  background: var(--separator);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .about::before, .members::before, .gallery::before,
+  .projects::before, .faq::before, .heroShape, .heroShape2 {
+    width: 400px;
+    height: 400px;
+    filter: blur(60px);
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .about::before, .members::before, .gallery::before,
+  .projects::before, .faq::before, .heroShape, .heroShape2 {
+    width: 300px;
+    height: 300px;
+    filter: blur(40px);
+    opacity: 0.2;
   }
 }
