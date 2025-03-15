@@ -193,7 +193,7 @@ export default function Shop() {
             <div className={styles.footerGrid}>
               <div className={styles.footerBrand}>
                 <h3 className="mono">uDuality</h3>
-                <p>Bringing communities together through innovation.</p>
+                <p>Klabat University Computer Science students, est. October 2022</p>
                 <div className={styles.socialIcons}>
                   <a href="#" aria-label="Discord">
                     <BsDiscord size={20} />
@@ -214,8 +214,8 @@ export default function Shop() {
             <div className={styles.footerBottom}>
               <p>&copy; {currentYear} uDuality. All rights reserved.</p>
               <div className={styles.footerBottomLinks}>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <Link href="/Privacy">Privacy Policy</Link>
+                <Link href="/Terms">Terms of Service</Link>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "@/styles/Cart.module.css";
 import { CartItem } from "./shop";
 // Add icon imports
-import { MdHome, MdCollections, MdShoppingCart } from "react-icons/md";
+import { MdHome, MdCollections} from "react-icons/md";
 import { BsDiscord, BsInstagram } from "react-icons/bs";
 
 export default function Cart() {
@@ -189,7 +189,7 @@ export default function Cart() {
             <div className={styles.footerGrid}>
               <div className={styles.footerBrand}>
                 <h3 className="mono">uDuality</h3>
-                <p>Bringing communities together through innovation.</p>
+                <p>Klabat University Computer Science students, est. October 2022</p>
                 <div className={styles.socialIcons}>
                   <a href="#" aria-label="Discord">
                     <BsDiscord size={20} />
@@ -210,8 +210,8 @@ export default function Cart() {
             <div className={styles.footerBottom}>
               <p>&copy; {currentYear} uDuality. All rights reserved.</p>
               <div className={styles.footerBottomLinks}>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <Link href="/privacy">Privacy Policy</Link>
+                <Link href="/terms">Terms of Service</Link>
               </div>
             </div>
           </div>

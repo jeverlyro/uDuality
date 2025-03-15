@@ -110,8 +110,8 @@ export default function Home() {
             <h2 className="section-title">About uDuality</h2>
             <div className={`${styles.aboutContent} glass`}>
               <div className={styles.aboutText}>
-                <p>Born in October 2022, uDuality started as a small group of third-year Computer Science students at Klabat University who wanted to create something awesome together. We're basically tech enthusiasts who believe coding doesn't have to be boring!</p>
-                <p>What makes us unique? We're not just about algorithms and data structures - we love to bring creativity into everything we do, from coding projects to fun outings. Our name reflects how we balance the technical and creative sides of computer science.</p>
+                <p>Born in October 2022, uDuality started as a small group of third-year Computer Science students at Klabat University who wanted to create something awesome together. Were basically tech enthusiasts who believe coding doesnt have to be boring!</p>
+                <p>What makes us unique? Were not just about algorithms and data structures - we love to bring creativity into everything we do, from coding projects to fun outings. Our name reflects how we balance the technical and creative sides of computer science.</p>
               </div>
             </div>
           </div>
@@ -164,7 +164,7 @@ export default function Home() {
                     <div className={styles.memberImage}></div>
                   </div>
                   <h3 className={styles.memberName}>CompSci Friend</h3>
-                  <p className={styles.memberRole}>Klabat University '25</p>
+                  <p className={styles.memberRole}>Klabat University 22</p>
                 </div>
               ))}
             </div>
@@ -179,7 +179,7 @@ export default function Home() {
             <h2 className="section-title">Our Digital & Real Life Adventures</h2>
             
             {/* Projects Subsection */}
-            <h3 className={styles.gallerySubtitle}>Cool Stuff We've Built</h3>
+            <h3 className={styles.gallerySubtitle}>Cool Stuff Weve Built</h3>
             <div className={styles.projectsGrid}>
               {/* Project cards */}
               {[1, 2, 3].map((project) => (
@@ -199,7 +199,7 @@ export default function Home() {
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div key={item} className={`${styles.galleryItem} glass`}>
                   <div className={styles.galleryImage}></div>
-                  <p className={styles.galleryCaption}>That time when we weren't in front of computers</p>
+                  <p className={styles.galleryCaption}>That time when we werent in front of computers</p>
                 </div>
               ))}
             </div>
@@ -270,17 +270,17 @@ export default function Home() {
               </div>
               <div className={styles.footerLinks}>
                 <h4>Quick Links</h4>
-                <a href="#about" onClick={(e) => scrollToSection(e, "about")}>About Us</a>
-                <a href="#members" onClick={(e) => scrollToSection(e, "members")}>The Squad</a>
-                <a href="#galleries" onClick={(e) => scrollToSection(e, "galleries")}>Our Adventures</a>
-                <Link href="/shop">Merch Shop</Link>
+                <a href="#about" onClick={(e) => scrollToSection(e, "about")}>About</a>
+                <a href="#members" onClick={(e) => scrollToSection(e, "members")}>Members</a>
+                <a href="#galleries" onClick={(e) => scrollToSection(e, "galleries")}>Galleries</a>
+                <Link href="/shop">Shop</Link>
               </div>
             </div>
             <div className={styles.footerBottom}>
               <p>&copy; {currentYear} uDuality - Klabat University CS Students</p>
               <div className={styles.footerBottomLinks}>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
+                <Link href="/privacy">Privacy Policy</Link>
+                <Link href="/terms">Terms of Service</Link>
               </div>
             </div>
           </div>
