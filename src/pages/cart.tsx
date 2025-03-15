@@ -127,7 +127,7 @@ export default function Cart() {
                         <div className={styles.productImage} style={{ backgroundImage: `url(${item.image})` }}></div>
                         <span>{item.name}</span>
                       </div>
-                      <div className={styles.priceCol}>${item.price.toFixed(2)}</div>
+                      <div className={styles.priceCol}>Rp{item.price.toFixed(2)}</div>
                       <div className={styles.quantityCol}>
                         <button 
                           className={styles.quantityButton}
@@ -144,7 +144,7 @@ export default function Cart() {
                           +
                         </button>
                       </div>
-                      <div className={styles.totalCol}>${(item.price * item.quantity).toFixed(2)}</div>
+                      <div className={styles.totalCol}>Rp{(item.price * item.quantity).toFixed(2)}</div>
                       <div className={styles.actionsCol}>
                         <button 
                           className={styles.removeButton}
@@ -159,20 +159,8 @@ export default function Cart() {
 
                 <div className={`${styles.cartSummary} glass`}>
                   <div className={styles.summaryRow}>
-                    <span>Subtotal:</span>
-                    <span>${calculateTotal().toFixed(2)}</span>
-                  </div>
-                  <div className={styles.summaryRow}>
-                    <span>Tax:</span>
-                    <span>${(calculateTotal() * 0.1).toFixed(2)}</span>
-                  </div>
-                  <div className={styles.summaryRow}>
-                    <span>Shipping:</span>
-                    <span>$5.00</span>
-                  </div>
-                  <div className={`${styles.summaryRow} ${styles.totalRow}`}>
                     <span>Total:</span>
-                    <span>${(calculateTotal() * 1.1 + 5).toFixed(2)}</span>
+                    <span>Rp{calculateTotal().toFixed(2)}</span>
                   </div>
                   
                   <div className={styles.cartActions}>

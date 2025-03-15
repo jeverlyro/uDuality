@@ -6,7 +6,7 @@ import styles from "@/styles/Shop.module.css";
 import { FaImages, FaTshirt, FaPlus } from 'react-icons/fa';
 // Update to match homepage icons
 import { MdHome, MdShoppingCart } from "react-icons/md";
-import { BsDiscord, BsGithub, BsInstagram } from "react-icons/bs";
+import { BsDiscord, BsInstagram } from "react-icons/bs";
 
 // Define the CartItem type
 export interface CartItem {
@@ -174,7 +174,7 @@ export default function Shop() {
                     )}
                   </div>
                   <h3 className={styles.shopItemName}>{item.name}</h3>
-                  <p className={styles.shopItemPrice}>${item.price.toFixed(2)}</p>
+                  <p className={styles.shopItemPrice}>IDR {item.price.toLocaleString('id-ID')}</p>
                   <button 
                     className={`button button-primary ${styles.shopButton}`}
                     onClick={() => addToCart(item)}
