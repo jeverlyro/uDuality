@@ -35,73 +35,6 @@
   overflow: visible;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-.main ol {
-  font-family: var(--font-geist-sans);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--glass-border);
-  background: transparent;
-  color: var(--foreground);
-  min-width: 158px;
-}
-
 .footer {
   margin-top: auto;
   padding: 4rem 0 2rem;
@@ -146,14 +79,12 @@ a.secondary {
   background-clip: text;
 }
 
-.footerLinks,
-.footerContact {
+.footerLinks {
   display: flex;
   flex-direction: column;
 }
 
-.footerLinks h4,
-.footerContact h4 {
+.footerLinks h4 {
   margin-bottom: 1.25rem;
   font-family: var(--font-geist-sans);
   font-size: 1.2rem;
@@ -162,8 +93,7 @@ a.secondary {
   padding-bottom: 0.5rem;
 }
 
-.footerLinks h4::after,
-.footerContact h4::after {
+.footerLinks h4::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -174,8 +104,7 @@ a.secondary {
   opacity: 0.6;
 }
 
-.footerLinks a,
-.footerContact a {
+.footerLinks a {
   margin-bottom: 0.75rem;
   width: fit-content; /* Constrain width to content size */
   display: inline-flex; /* Use inline-flex instead of flex */
@@ -185,8 +114,7 @@ a.secondary {
   padding: 0.25rem 0;
 }
 
-.footerLinks a:hover,
-.footerContact a:hover {
+.footerLinks a:hover {
   opacity: 1;
   transform: translateX(5px);
   text-decoration: none !important;
@@ -257,70 +185,6 @@ a.secondary {
   text-decoration: none !important;
 }
 
-.footerContactLink {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-.linkIndicator {
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.footerContactLink:hover .linkIndicator {
-  opacity: 1;
-  transform: translateX(8px);
-}
-
-.newsletterForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.inputWrapper {
-  display: flex;
-  width: 100%;
-  position: relative;
-}
-
-.newsletterForm input {
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  border: 1px solid rgba(var(--foreground-rgb), 0.2);
-  background: rgba(var(--background-end-rgb), 0.5);
-  color: var(--foreground);
-  width: 100%;
-  transition: all 0.2s ease;
-}
-
-.newsletterForm input:focus {
-  border-color: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-  outline: none;
-}
-
-.statusError {
-  color: #e53935; /* Red color for errors */
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .inputWrapper {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  
-  .subscribeButton {
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
@@ -384,22 +248,6 @@ a.secondary {
   overflow: visible;
 }
 
-/* Navigation */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 1rem 0;
-}
-
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .logoContainer {
   display: flex;
   align-items: center;
@@ -440,13 +288,6 @@ a.secondary {
 .navLinks a:hover {
   opacity: 1;
   color: var(--foreground);
-}
-
-.navCta {
-  padding: 0.5rem 1rem;
-  background: var(--accent-color);
-  border-radius: 4px;
-  margin-left: 1rem;
 }
 
 /* Update sidebar navigation links to match the new style */
@@ -500,11 +341,6 @@ a.secondary {
   );
 }
 
-.heroShape,
-.heroShape2 {
-  display: none;
-}
-
 .heroContent {
   padding: 3rem;
   border-radius: 20px;
@@ -542,25 +378,6 @@ a.secondary {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-family: var(--font-geist-sans);
-}
-
-.heroTitleHighlight {
-  position: relative;
-  display: inline-block;
-  /* Remove the inheritance of the parent's transparent text color for this element */
-  -webkit-text-fill-color: initial;
-  /* Use normal text color */
-  color: var(--foreground);
-}
-
-.heroTitleHighlight::after {
-  content: '';
-  position: absolute;
-  height: 8px;
-  width: 100%;
-  bottom: 5px;
-  left: 0;
-  z-index: -1;
 }
 
 .heroSubtitle {
@@ -695,11 +512,6 @@ a.secondary {
   
   .heroImage {
     height: 180px;
-  }
-  
-  .heroShape, .heroShape2 {
-    width: 300px;
-    height: 300px;
   }
 }
 
@@ -1160,53 +972,6 @@ a.secondary {
   margin-bottom: 0;
 }
 
-/* Shop Section */
-.shopGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.shopItem {
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.3s ease;
-  background: var(--card-bg);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
-}
-
-.shopItem:hover {
-  transform: translateY(-5px);
-}
-
-.shopItemImage {
-  width: 100%;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-bottom: 1.5rem;
-}
-
-.shopItemName {
-  font-family: var(--font-geist-sans);
-  margin-bottom: 0.5rem;
-}
-
-.shopItemPrice {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.shopButton {
-  width: 100%;
-}
-
-.shopButton:hover {
-  color: var(--foreground);
-  opacity: 0.7;
-}
 
 @media (max-width: 600px) {
   .page {
@@ -1262,15 +1027,13 @@ a.secondary {
     gap: 2.5rem;
   }
   
-  .footerLinks h4::after,
-  .footerContact h4::after {
+  .footerLinks h4::after {
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
   }
   
-  .footerLinks a,
-  .footerContact a {
+  .footerLinks a {
     margin-left: auto;
     margin-right: auto;
   }
@@ -1363,11 +1126,6 @@ a.secondary {
   min-width: 20px;
 }
 
-/* Remove the underline hover effect for sidebar links */
-.sidebar .navLinks a:after {
-  display: none;
-}
-
 .sidebar .navLinks a:hover {
   opacity: 1;
   color: var(--foreground);
@@ -1385,12 +1143,6 @@ a.secondary {
   opacity: 0.7;
 }
 
-.themeToggle {
-  margin-left: 1.5rem;
-  display: flex;
-  align-items: center;
-}
-
 /* Adjust the page layout for the top navbar */
 .page {
   min-height: 100vh;
@@ -1400,12 +1152,6 @@ a.secondary {
   transition: padding 0.3s ease;
   padding: var(--page-padding);
   padding-top: calc(60px + var(--page-padding)); /* Account for navbar height */
-}
-
-/* Remove the sidebar-specific padding classes since we're using a top navbar now */
-.withSidebar, .withClosedSidebar {
-  padding: var(--page-padding);
-  padding-top: calc(60px + var(--page-padding));
 }
 
 /* Mobile navigation styles */
@@ -1451,11 +1197,6 @@ a.secondary {
     padding-top: var(--page-padding);
     padding-bottom: calc(60px + var(--page-padding)); /* Account for navbar height */
   }
-  
-  .withSidebar, .withClosedSidebar {
-    padding-top: var(--page-padding);
-    padding-bottom: calc(60px + var(--page-padding));
-  }
 
   /* Hero section bottom margin */
   .hero {
@@ -1467,12 +1208,6 @@ a.secondary {
     padding-bottom: calc(3rem + 60px);
   }
 }
-
-/* Remove the toggle button as it's no longer needed */
-.sidebarToggle {
-  display: none;
-}
-
 /* Section background styles */
 .section {
   position: relative;

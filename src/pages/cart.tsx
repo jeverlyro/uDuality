@@ -3,6 +3,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Cart.module.css";
 import { CartItem } from "./shop";
+// Add icon imports
+import { MdHome, MdCollections, MdShoppingCart } from "react-icons/md";
+import { BsDiscord, BsInstagram } from "react-icons/bs";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -76,16 +79,21 @@ export default function Cart() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.page}>
-        {/* Navigation */}
+        {/* Updated Navigation */}
         <nav className={`${styles.navbar} glass`}>
           <div className={styles.container}>
             <div className={styles.logoContainer}>
               <Link href="/" className={`${styles.logo} mono`}>uDuality</Link>
             </div>
             <div className={styles.navLinks}>
-              <Link href="/">Home</Link>
-              <Link href="/shop">Shop</Link>
-              <ThemeSwitch />
+              <Link href="/" className={styles.navLink}>
+                <MdHome size={20} />
+                <span>Home</span>
+              </Link>
+              <Link href="/shop" className={styles.navLink}>
+                <MdCollections size={20} />
+                <span>Shop</span>
+              </Link>
             </div>
           </div>
         </nav>
@@ -187,29 +195,36 @@ export default function Cart() {
           </div>
         </section>
 
-        {/* Footer */}
+        {/* Updated Footer */}
         <footer className={`${styles.footer} glass`}>
           <div className="container">
             <div className={styles.footerGrid}>
               <div className={styles.footerBrand}>
                 <h3 className="mono">uDuality</h3>
                 <p>Bringing communities together through innovation.</p>
+                <div className={styles.socialIcons}>
+                  <a href="#" aria-label="Discord">
+                    <BsDiscord size={20} />
+                  </a>
+                  <a href="#" aria-label="Instagram">
+                    <BsInstagram size={20} />
+                  </a>
+                </div>
               </div>
               <div className={styles.footerLinks}>
-                <h4>Links</h4>
+                <h4>Navigation</h4>
                 <Link href="/#about">About</Link>
                 <Link href="/#members">Members</Link>
-                <Link href="/#projects">Projects</Link>
-                <Link href="/#gallery">Gallery</Link>
-              </div>
-              <div className={styles.footerContact}>
-                <h4>Connect</h4>
-                <a href="#">Discord</a>
-                <a href="#">GitHub</a>
+                <Link href="/#galleries">Galleries</Link>
+                <Link href="/shop">Shop</Link>
               </div>
             </div>
             <div className={styles.footerBottom}>
               <p>&copy; {currentYear} uDuality. All rights reserved.</p>
+              <div className={styles.footerBottomLinks}>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+              </div>
             </div>
           </div>
         </footer>

@@ -23,6 +23,7 @@ export default function Shop() {
   const [addedItem, setAddedItem] = useState("");
   const [currentYear, setCurrentYear] = useState("2025");
   const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
+  const [notificationKey, setNotificationKey] = useState(0); // Add this for animation reset
 
   // Set isClient to true when component mounts (client-side only)
   useEffect(() => {
@@ -64,7 +65,22 @@ export default function Shop() {
     
     try {
       // Get existing cart or create empty array
-      const cart = JSON.parse(localStorage.getItem('udualityCart') || '[]');
+      let cart: CartItem[] = [];
+      
+      try {
+        // Safely parse the cart data
+        const cartData = localStorage.getItem('udualityCart');
+        cart = cartData ? JSON.parse(cartData) : [];
+        
+        // Ensure cart is an array
+        if (!Array.isArray(cart)) {
+          cart = [];
+          console.warn("Cart data was invalid, resetting");
+        }
+      } catch (parseError) {
+        console.error("Error parsing cart data:", parseError);
+        cart = []; // Reset if there's a parsing error
+      }
       
       // Check if item already exists in cart
       const existingItemIndex = cart.findIndex((cartItem: CartItem) => cartItem.id === item.id);
@@ -74,17 +90,25 @@ export default function Shop() {
         cart[existingItemIndex].quantity += 1;
       } else {
         // Add new item with quantity 1
-        cart.push({...item, quantity: 1});
+        cart.push({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          quantity: 1
+        });
       }
       
       // Save updated cart
       localStorage.setItem('udualityCart', JSON.stringify(cart));
       
-      // Show notification
+      // Show notification and reset animation
       setAddedItem(item.name);
+      setNotificationKey(prevKey => prevKey + 1);
       setShowNotification(true);
     } catch (error) {
       console.error("Error adding item to cart:", error);
+      alert("Failed to add item to cart. Please try again.");
     }
   };
   
@@ -123,11 +147,11 @@ export default function Shop() {
             <h1 className="section-title">Our Shop</h1>
             <p className={styles.shopIntro}>Browse through our collection of merchandise and support our community.</p>
             
-            {/* Add notification display */}
+            {/* Enhanced notification display with animation */}
             {showNotification && (
-              <div className={styles.notification}>
+              <div key={notificationKey} className={styles.notification}>
                 <MdShoppingCart className={styles.notificationIcon} />
-                {addedItem} added to cart!
+                <span className={styles.notificationText}>{addedItem} added to cart!</span>
               </div>
             )}
             
