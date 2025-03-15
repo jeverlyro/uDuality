@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Cart.module.css";
-import ThemeSwitch from "@/components/ThemeSwitch";
 import { CartItem } from "./shop";
 
 export default function Cart() {

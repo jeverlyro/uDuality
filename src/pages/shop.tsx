@@ -2,9 +2,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Shop.module.css";
-import ThemeSwitch from "@/components/ThemeSwitch";
 // Import icons
-import { FaShoppingCart, FaHome, FaImages, FaTshirt, FaDiscord, FaGithub, FaPlus } from 'react-icons/fa';
+import { FaImages, FaTshirt, FaPlus } from 'react-icons/fa';
+// Update to match homepage icons
+import { MdHome, MdShoppingCart } from "react-icons/md";
+import { BsDiscord, BsGithub, BsInstagram } from "react-icons/bs";
 
 // Define the CartItem type
 export interface CartItem {
@@ -103,9 +105,14 @@ export default function Shop() {
               <Link href="/" className={`${styles.logo} mono`}>uDuality</Link>
             </div>
             <div className={styles.navLinks}>
-              <Link href="/" className={styles.iconLink}><FaHome /><span>Home</span></Link>
-              <Link href="/cart" className={styles.cartLink}><FaShoppingCart /><span>Cart</span></Link>
-              <ThemeSwitch />
+              <Link href="/" className={styles.iconLink}>
+                <MdHome size={20} />
+                <span>Home</span>
+              </Link>
+              <Link href="/cart" className={styles.cartLink}>
+                <MdShoppingCart size={20} />
+                <span>Cart</span>
+              </Link>
             </div>
           </div>
         </nav>
@@ -119,7 +126,7 @@ export default function Shop() {
             {/* Add notification display */}
             {showNotification && (
               <div className={styles.notification}>
-                <FaShoppingCart className={styles.notificationIcon} />
+                <MdShoppingCart className={styles.notificationIcon} />
                 {addedItem} added to cart!
               </div>
             )}
@@ -156,29 +163,36 @@ export default function Shop() {
           </div>
         </section>
 
-        {/* Footer */}
+        {/* Footer - Updated to match homepage */}
         <footer className={`${styles.footer} glass`}>
           <div className="container">
             <div className={styles.footerGrid}>
               <div className={styles.footerBrand}>
                 <h3 className="mono">uDuality</h3>
                 <p>Bringing communities together through innovation.</p>
+                <div className={styles.socialIcons}>
+                  <a href="#" aria-label="Discord">
+                    <BsDiscord size={20} />
+                  </a>
+                  <a href="#" aria-label="Instagram">
+                    <BsInstagram size={20} />
+                  </a>
+                </div>
               </div>
               <div className={styles.footerLinks}>
-                <h4>Links</h4>
+                <h4>Navigation</h4>
                 <Link href="/#about">About</Link>
                 <Link href="/#members">Members</Link>
-                <Link href="/#projects">Projects</Link>
-                <Link href="/#gallery">Gallery</Link>
-              </div>
-              <div className={styles.footerContact}>
-                <h4>Connect</h4>
-                <a href="#" className={styles.socialLink}><FaDiscord className={styles.socialIcon} /> Discord</a>
-                <a href="#" className={styles.socialLink}><FaGithub className={styles.socialIcon} /> GitHub</a>
+                <Link href="/#galleries">Galleries</Link>
+                <Link href="/shop">Shop</Link>
               </div>
             </div>
             <div className={styles.footerBottom}>
               <p>&copy; {currentYear} uDuality. All rights reserved.</p>
+              <div className={styles.footerBottomLinks}>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+              </div>
             </div>
           </div>
         </footer>

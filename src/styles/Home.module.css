@@ -1,52 +1,26 @@
-/* Define CSS variables for light/dark mode with black and white focus */
+/* Update root variables for dark theme */
 :root {
-  /* Light mode defaults */
-  --background: #ffffff;
-  --foreground: #000000;
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-  --text-muted: rgba(0, 0, 0, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --separator: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
-  --hero-gradient: linear-gradient(45deg, #000000, #333333);
-  /* Add missing light mode button variables */
-  --button-primary-hover: rgba(0, 0, 0, 0.8);
-  --button-secondary-hover: rgba(0, 0, 0, 0.05);
-  /* Add these light mode variables */
-  --accent-rgb: 0, 0, 0;
-  --primary-rgb: 0, 0, 0;
-  --secondary-rgb: 100, 100, 100;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 245, 245, 245;
-  --foreground-rgb: 0, 0, 0;
-  --accent-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-    --glass-bg: rgba(0, 0, 0, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    --text-muted: rgba(255, 255, 255, 0.7);
-    --card-bg: rgba(15, 15, 15, 0.9);
-    --separator: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    --hero-gradient: linear-gradient(45deg, #ffffff, #cccccc);
-    /* RGB values for other components */
-    --accent-rgb: 255, 255, 255;
-    --primary-rgb: 255, 255, 255;
-    --secondary-rgb: 200, 200, 200;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 15, 15, 15;
-    --foreground-rgb: 255, 255, 255;
-    /* Dark mode button variables */
-    --button-primary-hover: rgb(255, 255, 255);
-    --button-secondary-hover: rgba(255, 255, 255, 0.05);
-    --accent-color: rgba(255, 255, 255, 0.8);
-  }
+  /* Theme variables */
+  --background: #202020;
+  --foreground: #ffffff;
+  --glass-bg: rgba(15, 15, 15, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(40, 40, 40, 0.9);
+  --separator: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  --hero-gradient: linear-gradient(45deg, #ffffff, #cccccc);
+  /* Button variables */
+  --button-primary-hover: rgba(255, 255, 255, 0.9);
+  --button-secondary-hover: rgba(255, 255, 255, 0.1);
+  /* RGB variables */
+  --accent-rgb: 255, 255, 255;
+  --primary-rgb: 255, 255, 255;
+  --secondary-rgb: 180, 180, 180;
+  --background-start-rgb: 18, 18, 18;
+  --background-end-rgb: 10, 10, 10;
+  --foreground-rgb: 255, 255, 255;
+  --accent-color: rgba(255, 255, 255, 0.8);
 }
 
 .page {
@@ -58,6 +32,7 @@
   font-family: var(--font-geist-sans);
   padding-top: 60px; 
   margin: 0;
+  overflow: visible;
 }
 
 .main {
@@ -129,26 +104,46 @@ a.secondary {
 
 .footer {
   margin-top: auto;
-  padding: 3rem 0 1.5rem;
+  padding: 4rem 0 2rem;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(var(--background-start-rgb), 0.8)
+  );
 }
 
 .footer::before {
-  display: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--separator);
+  opacity: 0.5;
+  display: block;
 }
 
 .footerGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
   padding: 2rem 0;
+  position: relative;
 }
 
 .footerBrand h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  margin-bottom: 1.2rem;
   font-family: var(--font-geist-sans);
+  background-image: var(--hero-gradient);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .footerLinks,
@@ -159,33 +154,78 @@ a.secondary {
 
 .footerLinks h4,
 .footerContact h4 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   font-family: var(--font-geist-sans);
+  font-size: 1.2rem;
+  color: var(--foreground);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footerLinks h4::after,
+.footerContact h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--accent-color);
+  opacity: 0.6;
 }
 
 .footerLinks a,
 .footerContact a {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  width: fit-content; /* Constrain width to content size */
+  display: inline-flex; /* Use inline-flex instead of flex */
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0.85;
+  padding: 0.25rem 0;
+}
+
+.footerLinks a:hover,
+.footerContact a:hover {
+  opacity: 1;
+  transform: translateX(5px);
+  text-decoration: none !important;
 }
 
 .footerBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0;
+  padding: 1.75rem 0;
   border-top: 1px solid rgba(var(--foreground-rgb), 0.1);
   font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 .footerBottomLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
+}
+
+.footerBottomLinks a {
+  width: fit-content; /* Constrain width to text content */
+  display: inline-flex; /* Control the layout better */
+  align-items: center;
+  transition: all 0.25s ease;
+  opacity: 0.8;
+}
+
+.footerBottomLinks a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  text-decoration: none !important;
 }
 
 .footer a {
-  display: flex;
+  display: inline-flex; /* Change from flex to inline-flex */
   align-items: center;
   gap: 8px;
+  width: fit-content; /* Make clickable area only as wide as content */
 }
 
 .footer img {
@@ -195,45 +235,43 @@ a.secondary {
 .socialIcons {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
 }
 
 .socialIcons a {
-  display: flex;
+  display: flex; /* Keep this as flex */
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
   border-radius: 50%;
   background-color: rgba(var(--background-start-rgb), 0.1);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: var(--foreground);
 }
 
 .socialIcons a:hover {
   background-color: rgba(0, 0, 0, 0.1);
-  transform: translateY(-3px);
-}
-
-@media (prefers-color-scheme: dark) {
-  .socialIcons a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+  text-decoration: none !important;
 }
 
 .footerContactLink {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .linkIndicator {
   opacity: 0;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .footerContactLink:hover .linkIndicator {
   opacity: 1;
-  transform: translateX(5px);
+  transform: translateX(8px);
 }
 
 .newsletterForm {
@@ -266,17 +304,8 @@ a.secondary {
   outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .newsletterForm input:focus {
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .statusError {
-    color: #f44336; /* Lighter red for better visibility in dark mode */
-  }
+.statusError {
+  color: #e53935; /* Red color for errors */
 }
 
 /* Responsive adjustments */
@@ -352,6 +381,7 @@ a.secondary {
   width: 100%;
   position: relative;
   z-index: 2;
+  overflow: visible;
 }
 
 /* Navigation */
@@ -383,6 +413,7 @@ a.secondary {
   font-family: var(--font-geist-sans);
 }
 
+/* Updated Navigation styles */
 .navLinks {
   display: flex;
   gap: 2rem;
@@ -391,21 +422,24 @@ a.secondary {
 
 .navLinks a {
   position: relative;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  opacity: 0.85;
+  padding: 0.5rem 0;
+  /* Remove extra padding that might extend the clickable area */
+  display: inline-block;
+  width: auto;
 }
 
+/* Remove the underline hover effect */
 .navLinks a:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--foreground);
-  transition: width 0.3s ease;
+  display: none;
 }
 
-.navLinks a:hover:after {
-  width: 100%;
+.navLinks a:hover {
+  opacity: 1;
+  color: var(--foreground);
 }
 
 .navCta {
@@ -415,7 +449,33 @@ a.secondary {
   margin-left: 1rem;
 }
 
-/* Hero Section */
+/* Update sidebar navigation links to match the new style */
+.sidebar .navLinks a {
+  position: relative;
+  padding: 0.5rem 0;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+  width: auto;
+  /* Ensure links don't have extra hit areas */
+  box-sizing: content-box;
+}
+
+/* Remove the underline hover effect for sidebar links */
+.sidebar .navLinks a:after {
+  display: none;
+}
+
+.sidebar .navLinks a:hover {
+  opacity: 1;
+  color: var(--foreground);
+}
+
 .hero {
   position: relative;
   min-height: calc(100vh - 60px); /* Take full height minus navbar */
@@ -468,9 +528,9 @@ a.secondary {
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.1;
-  /* Fallback color in case gradient doesn't work */
+  /* Fallback color */
   color: var(--foreground);
-  /* Light mode gradient */
+  /* Gradient */
   background-image: var(--hero-gradient);
   background-size: 100%;
   background-repeat: no-repeat;
@@ -666,17 +726,10 @@ a.secondary {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .heroTitle {
-    /* Dark mode gradient */
-    background-image: linear-gradient(45deg, rgba(var(--foreground-rgb), 1), rgba(var(--accent-rgb), 1));
-  }
-}
-
 /* About Section */
 .about {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .about::before,
@@ -689,6 +742,10 @@ a.secondary {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  position: relative;
+  z-index: 2;
+  border-radius: 12px;
+  overflow: visible;
 }
 
 .aboutText p {
@@ -696,95 +753,225 @@ a.secondary {
   line-height: 1.8;
 }
 
-/* Members Section - Updated to match Shop styling */
 .membersGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
   gap: 2rem;
+  position: relative;
+  z-index: 2;
+  padding: 8px; /* Increased padding to prevent hover cutoff */
+  margin: -8px; /* Offset the padding to maintain layout alignment */
+  overflow: visible;
 }
 
+.membersGrid,
+.galleryGrid,
+.projectsGrid {
+  padding: 8px; /* Consistent padding for all grids */
+  margin: -8px; /* Offset padding */
+  overflow: visible; /* Critical - allow content to overflow */
+}
+
+.membersGrid {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+
+.galleryGrid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.membersGrid,
+.galleryGrid {
+  display: grid;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+  padding: 1px;
+  margin: -1px;
+}
+
+.membersGrid {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+
+.galleryGrid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+/* Responsive adjustments for galleries section */
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: 2.5rem;
+  }
+  
+  .gallerySubtitle {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .galleryItem {
+    height: 200px;
+  }
+}
+
+/* Enhanced Member Card Styling */
 .memberCard {
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   text-align: center;
-  transition: all 0.3s ease;
-  border-radius: 8px;
+  transition: all 0.35s cubic-bezier(0.1, 0.7, 0.1, 1);
+  border-radius: 16px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  overflow: hidden;
+  overflow: visible;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  margin: 8px 0; /* Explicit top/bottom margins */
+  transform-origin: center center;
 }
 
 .memberCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .memberImageContainer {
   position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 1.5rem;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1.75rem;
   border-radius: 50%;
   overflow: hidden;
   background-color: rgba(var(--foreground-rgb), 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.35s cubic-bezier(0.1, 0.7, 0.1, 1);
+  border: 3px solid transparent;
+}
+
+.memberCard:hover .memberImageContainer {
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
 }
 
 .memberImage {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  transition: transform 0.3s ease;
-  background-color: rgba(var(--foreground-rgb), 0.1);
+  transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+  filter: grayscale(30%);
 }
 
 .memberCard:hover .memberImage {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: grayscale(0%);
 }
 
 .memberName {
   font-family: var(--font-geist-sans);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--foreground);
-  transition: color 0.3s ease;
+  font-size: 1.35rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.memberName::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.memberCard:hover .memberName::after {
+  width: 80%;
+  opacity: 1;
 }
 
 .memberRole {
   color: var(--text-muted);
-  transition: color 0.3s ease;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-  .memberCard:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-  }
-  
-  .memberImageContainer {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+.memberCard:hover .memberRole {
+  color: rgba(var(--accent-rgb), 0.8);
 }
 
-/* Gallery Section */
+/* Gallery Section - Fix hover cutoff issues */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+  padding: 8px; /* Increase padding to prevent hover cutoff */
+  margin: -8px; /* Offset the padding to maintain layout */
+  overflow: visible;
 }
 
+/* Enhanced Gallery Item Styling */
 .galleryItem {
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
-  height: 250px;
-  transition: transform 0.3s ease;
+  height: 280px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   background: var(--card-bg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  margin: 8px 0; /* Explicit top/bottom margins */
+  transform-origin: center center;
 }
 
 .galleryItem:hover {
-  transform: scale(1.02);
+  transform: translateY(-8px) rotateX(3deg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .galleryImage {
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  object-fit: cover;
+  filter: brightness(0.9);
+}
+
+.galleryItem:hover .galleryImage {
+  transform: scale(1.05);
+  filter: brightness(1);
 }
 
 .galleryCaption {
@@ -792,61 +979,92 @@ a.secondary {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  backdrop-filter: blur(8px);
   color: white;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateY(5px);
+  opacity: 0.9;
 }
 
-/* Projects Section */
-.projectsGrid {
+.galleryItem:hover .galleryCaption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.galleryCaption h4 {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-geist-sans);
+  font-size: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.galleryCaption p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0;
+  transition: all 0.4s ease;
+}
+
+.galleryItem:hover .galleryCaption p {
+  opacity: 1;
+}
+
+/* Improve grids with better spacing */
+.membersGrid,
+.galleryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+  padding: 1px;
+  margin: -1px;
 }
 
-.projectCard {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 0.3s ease;
-  background: var(--card-bg);
+.membersGrid {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 }
 
-.projectCard:hover {
-  transform: translateY(-5px);
+.galleryGrid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 
-.projectImage {
-  width: 100%;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-bottom: 1.5rem;
+/* Responsive adjustments for galleries section */
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: 2.5rem;
+  }
+  
+  .gallerySubtitle {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+  }
 }
 
-.projectTitle {
-  font-family: var(--font-geist-sans);
-  margin-bottom: 0.8rem;
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .galleryItem {
+    height: 200px;
+  }
 }
 
-.projectDescription {
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-
-.projectLink {
-  align-self: flex-start;
-  font-family: var(--font-geist-sans);
-}
-
-.projectLink:hover {
-  color: var(--foreground);
-  opacity: 0.7;
-}
-
-/* FAQ Section - Updated to match Shop styling */
+/* FAQ Section - Enhanced with smoother animations */
 .faqContainer {
   padding: 2rem;
   border-radius: 8px;
@@ -854,30 +1072,92 @@ a.secondary {
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  border-radius: 12px;
+  overflow: visible;
 }
 
 .faqItem {
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--glass-border);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .faqItem:last-child {
   border-bottom: none;
 }
 
+.faqItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .faqQuestion {
   font-family: var(--font-geist-sans);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0;
   font-size: 1.2rem;
   color: var(--foreground);
-  transition: color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 0;
+}
+
+.faqQuestion svg {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  opacity: 0.8;
 }
 
 .faqAnswer {
   line-height: 1.6;
   color: var(--text-muted);
-  transition: color 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 1rem 0 0;
+  transform-origin: top;
+  transform: translateY(-10px);
+  will-change: max-height, opacity, transform, margin;
+}
+
+.faqItem.active {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.faqItem.active .faqQuestion {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.faqItem.active .faqQuestion svg {
+  transform: rotate(-180deg);
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.faqItem.active .faqAnswer {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+  transform: translateY(0);
+}
+
+/* Improve hover states */
+.faqItem {
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.faqItem:last-child {
+  margin-bottom: 0;
 }
 
 /* Shop Section */
@@ -892,6 +1172,10 @@ a.secondary {
   text-align: center;
   transition: transform 0.3s ease;
   background: var(--card-bg);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
 }
 
 .shopItem:hover {
@@ -944,12 +1228,12 @@ a.secondary {
   .navLinks {
     display: none;
   }
-  
+    
   .heroContent {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+    
   .heroTitle {
     font-size: 3rem;
   }
@@ -968,16 +1252,35 @@ a.secondary {
   
   .footerBottom {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
     text-align: center;
   }
   
   .footerGrid {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 2.5rem;
+  }
+  
+  .footerLinks h4::after,
+  .footerContact h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+  }
+  
+  .footerLinks a,
+  .footerContact a {
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .socialIcons {
+    justify-content: center;
+  }
+  
+  .footerBottomLinks {
+    flex-wrap: wrap;
     justify-content: center;
   }
 }
@@ -1042,7 +1345,7 @@ a.secondary {
 
 .sidebar .navLinks a {
   position: relative;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0;
   text-align: center;
   transition: all 0.3s ease;
   display: flex;
@@ -1051,25 +1354,23 @@ a.secondary {
   color: var(--foreground); /* Ensure text color matches theme */
   text-decoration: none;
   font-weight: 500;
+  width: auto;
+  /* Ensure links don't have extra hit areas */
+  box-sizing: content-box;
 }
 
 .sidebar .navLinks a svg {
   min-width: 20px;
 }
 
+/* Remove the underline hover effect for sidebar links */
 .sidebar .navLinks a:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--foreground);
-  transition: width 0.3s ease;
+  display: none;
 }
 
-.sidebar .navLinks a:hover:after {
-  width: 100%;
+.sidebar .navLinks a:hover {
+  opacity: 1;
+  color: var(--foreground);
 }
 
 .sidebar .navCta {
@@ -1175,11 +1476,16 @@ a.secondary {
 /* Section background styles */
 .section {
   position: relative;
-  padding: 5rem 0; /* Remove horizontal padding to allow container to handle it */
-  overflow: hidden;
+  padding: 6rem 0; /* Increased padding */
+  overflow: visible;
   width: 100%;
   margin-top: -1px; /* Prevent tiny gaps between sections */
   margin-bottom: -1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--background-start-rgb), 1),
+    rgba(var(--background-end-rgb), 1)
+  );
 }
 
 .section::before,
@@ -1240,9 +1546,9 @@ a.secondary {
 /* Improve glass effect for all sections */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--glass-shadow), 0 0 15px rgba(255, 255, 255, 0.05);
   color: var(--foreground);
 }
 
@@ -1254,49 +1560,622 @@ a.secondary {
 .projectsGrid {
   position: relative;
   z-index: 2;
+  border-radius: 12px;
+  overflow: visible;
 }
 
 /* Create section separators that don't add extra space */
 .sectionSeparator {
   height: 1px;
   background: linear-gradient(90deg, 
-    rgba(var(--foreground-rgb), 0),
-    rgba(var(--foreground-rgb), 0.1),
-    rgba(var(--foreground-rgb), 0)
+    rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2), 
+    rgba(255, 255, 255, 0)
   );
   width: 100%;
   margin: 0;
   padding: 0;
   position: relative;
   z-index: 3;
-  background: var(--separator);
 }
 
-/* Mobile adjustments */
+.galleries {
+  position: relative;
+}
+
+.galleries::before,
+.galleries::after {
+  display: none;
+}
+
+.gallerySubtitle {
+  font-family: var(--font-geist-sans);
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  color: var(--foreground);
+  position: relative;
+}
+
+.gallerySubtitle:first-of-type {
+  margin-top: 0;
+}
+
+/* Improve spacing between subsections */
+.projectsGrid {
+  margin-bottom: 3.5rem;
+}
+
+/* Ensure consistent styling between the two grids */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.galleryItem {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+}
+
+.galleryItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.galleryCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  color: white;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments for galleries section */
 @media (max-width: 768px) {
-  .section {
-    padding: 4rem 0;
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
   
-  .about::before, .members::before, .gallery::before,
-  .projects::before, .faq::before, .heroShape, .heroShape2 {
-    width: 400px;
-    height: 400px;
-    filter: blur(60px);
-    opacity: 0.3;
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: 2.5rem;
+  }
+  
+  .gallerySubtitle {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .section {
-    padding: 3rem 0;
+  .galleryGrid {
+    grid-template-columns: 1fr;
   }
   
-  .about::before, .members::before, .gallery::before,
-  .projects::before, .faq::before, .heroShape, .heroShape2 {
-    width: 300px;
-    height: 300px;
-    filter: blur(40px);
-    opacity: 0.2;
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .galleryItem {
+    height: 200px;
+  }
+}
+
+/* Projects Grid and Cards */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+  padding: 8px;
+  margin: -8px -8px 3.5rem -8px;
+  overflow: visible;
+}
+
+.projectCard {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background: var(--glass-bg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--glass-border);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.projectCard:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  object-fit: cover;
+  filter: brightness(0.9) saturate(0.85);
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1.1);
+}
+
+.projectTitle {
+  font-family: var(--font-geist-sans);
+  margin: 1.25rem 1.5rem 0.75rem;
+  color: var(--foreground);
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.projectTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.projectCard:hover .projectTitle::after {
+  width: 70%;
+  opacity: 1;
+}
+
+.projectDescription {
+  padding: 0 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 1.5rem 1.5rem;
+  color: var(--accent-color);
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+  padding-right: 20px;
+}
+
+.projectLink:after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.projectLink:hover {
+  transform: translateX(5px);
+  opacity: 0.9;
+  padding-right: 25px;
+}
+
+.projectLink:hover:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* Ensure the galleryGrid and projectsGrid are consistent */
+.galleryGrid, 
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+  padding: 1px;
+  margin: -1px;
+}
+
+/* Responsive adjustments for project cards */
+@media (max-width: 768px) {
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .projectImage {
+    height: 160px;
+  }
+}
+
+/* Add to your Home.module.css file */
+.minecraft {
+  padding: 4rem 0;
+}
+
+.minecraftContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.minecraftInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.minecraftInfo h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.minecraftInfo h4 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.minecraftInfo ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.minecraftInfo li {
+  margin-bottom: 0.5rem;
+}
+
+.serverAddressContainer {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.serverAddressLabel {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.serverAddressCopy {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.serverAddress {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  flex-grow: 1;
+}
+
+.copyButton {
+  background-color: #4a69bd;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.copyButton:hover {
+  background-color: #1e3799;
+}
+
+.serverVersion {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.minecraftImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minecraftPreview {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-image: url('/minecraft-preview.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5rem;
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+  .minecraftContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .minecraftPreview {
+    min-height: 200px;
+  }
+}
+
+/* Add these styles to enhance the navbar links and minecraft section */
+
+/* Enhanced Navigation Link Styles */
+.navLink {
+  position: relative;
+  padding: 0.5rem 0;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+  width: auto;
+  overflow: hidden;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.navLink:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+.navLink:hover {
+  transform: translateY(-2px);
+  color: var(--foreground);
+}
+
+.navLink svg {
+  transition: transform 0.3s ease;
+}
+
+.navLink:hover svg {
+  transform: scale(1.2);
+}
+
+/* Improved Minecraft Section */
+.minecraft {
+  padding: 5rem 0;
+}
+
+.minecraftContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.minecraftContent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(74, 105, 189, 0.1), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.minecraftInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.minecraftInfo h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-geist-sans);
+  background: linear-gradient(45deg, #ffffff, #91a3ff);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.minecraftInfo h4 {
+  font-size: 1.25rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--foreground);
+}
+
+.minecraftInfo ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+  list-style-type: decimal;
+}
+
+.minecraftInfo li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.serverAddressContainer {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  margin: 1.25rem 0;
+  border: 1px solid rgba(74, 105, 189, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.serverAddressLabel {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: var(--foreground);
+}
+
+.serverAddressCopy {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.serverAddress {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: monospace;
+  flex-grow: 1;
+  letter-spacing: 1px;
+  color: #91a3ff;
+  user-select: all;
+}
+
+.copyButton {
+  background-color: #4a69bd;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.copyButton:hover {
+  background-color: #1e3799;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.copyButton:active {
+  transform: translateY(1px);
+}
+
+.serverVersion {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.serverVersion::before {
+  content: '•';
+  color: #4a69bd;
+  font-size: 1.2rem;
+}
+
+.minecraftImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.minecraftPreview {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  background-image: url('/minecraft-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.minecraftPreview:hover {
+  transform: scale(1.02) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.minecraftPreview::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(74, 105, 189, 0.2), transparent);
+  pointer-events: none;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+  .minecraftContent {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .minecraftPreview {
+    min-height: 220px;
+  }
+  
+  .sidebar .navLinks a {
+    gap: 0.25rem;
+  }
+  
+  .sidebar .navLinks a.navLink svg {
+    font-size: 1.25rem;
   }
 }
