@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Cart.module.css";
 import { CartItem } from "./shop";
-// Add icon imports
 import { MdHome, MdShoppingBag} from "react-icons/md";
 import { BsDiscord, BsInstagram } from "react-icons/bs";
 
@@ -12,29 +11,24 @@ export default function Cart() {
   const [isClient, setIsClient] = useState(false);
   const [currentYear, setCurrentYear] = useState("2025");
 
-  // Set isClient to true when component mounts (client-side only)
   useEffect(() => {
     setIsClient(true);
-    // Load cart data from localStorage when component mounts (client-side only)
     const savedCart = localStorage.getItem('udualityCart');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
       } catch (error) {
         console.error("Error parsing cart data:", error);
-        localStorage.removeItem('udualityCart'); // Clear invalid data
+        localStorage.removeItem('udualityCart');
       }
     }
-    // Update the year client-side
     setCurrentYear(new Date().getFullYear().toString());
   }, []);
 
-  // Calculate total price
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
-  // Update item quantity
   const updateQuantity = (id: number, newQuantity: number) => {
     if (!isClient || newQuantity < 1) return;
 
@@ -46,7 +40,6 @@ export default function Cart() {
     localStorage.setItem('udualityCart', JSON.stringify(updatedCart));
   };
 
-  // Remove item from cart
   const removeItem = (id: number) => {
     if (!isClient) return;
     
@@ -55,7 +48,6 @@ export default function Cart() {
     localStorage.setItem('udualityCart', JSON.stringify(updatedCart));
   };
 
-  // Clear cart
   const clearCart = () => {
     if (!isClient) return;
     
@@ -63,10 +55,8 @@ export default function Cart() {
     localStorage.removeItem('udualityCart');
   };
 
-  // Simple checkout function
   const checkout = () => {
     if (!isClient) return;
-    // In a real app, you would handle the checkout process here
     alert('Checkout functionality will be implemented in the future!');
   };
 
@@ -182,8 +172,8 @@ export default function Cart() {
             )}
           </div>
         </section>
-
-        {/* Updated Footer */}
+  
+          {/* Footer */}
         <footer className={`${styles.footer} glass`}>
           <div className="container">
             <div className={styles.footerGrid}>

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import styles from "@/styles/Shop.module.css"; // Reusing Shop styles
+import styles from "@/styles/Shop.module.css";
 import { useState, useEffect } from "react";
 import { MdHome, MdShoppingCart } from "react-icons/md";
 import { BsDiscord, BsInstagram } from "react-icons/bs";

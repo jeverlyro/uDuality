@@ -17,7 +17,6 @@ export default function Home() {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
-  // Add smooth scroll function
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
@@ -77,11 +76,8 @@ export default function Home() {
               <h1 className={styles.heroTitle}>
                 Unklab Duality
               </h1>
-              <p className={styles.heroSubtitle}>CompSci Students with a Creative Twist</p>
               <p className={styles.heroDescription}>
-                We're a bunch of third-year Computer Science students from Klabat University 
-                who love to blend coding skills with creative vibes. Join our journey of 
-                learning, creating, and having fun with tech!
+                We're a group of Computer Science students from Klabat University who love to code, games, and have fun together. Join us and unleash the duality of tech and creativity!
               </p>
               <div className={styles.heroCtas}>
                 <a href="#about" className={`button button-primary ${styles.heroButton}`} onClick={(e) => scrollToSection(e, "about")}>
@@ -124,7 +120,6 @@ export default function Home() {
           <div className="container">
             <h2 className="section-title">Questions You Might Have</h2>
             <div className={`${styles.faqContainer} glass`}>
-              {/* FAQ items with toggle functionality */}
               {[
                 { question: "What exactly is uDuality?", answer: "We're a group of Computer Science students from Klabat University who came together in October 2022. Think of us as a tech club with a creative flair - we code, design, hang out, and build cool stuff together!" },
                 { question: "Can I join your group?", answer: "Absolutely! If you're a Klabat University student interested in coding, design, or just want to be part of a fun tech community, reach out to any of our members. We're always looking for new friends who share our passion for technology and creativity." },
@@ -157,7 +152,6 @@ export default function Home() {
           <div className="container">
             <h2 className="section-title">The Squad</h2>
             <div className={styles.membersGrid}>
-              {/* Member cards with improved styling */}
               {[1, 2, 3].map((member) => (
                 <div key={member} className={`${styles.memberCard} glass`}>
                   <div className={styles.memberImageContainer}>

@@ -4,7 +4,7 @@
   flex-direction: column;
 }
 
-/* Navbar styles - update to match Home.module.css */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -53,10 +53,10 @@
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   opacity: 0.85;
-  padding: 0.5rem;  /* Updated from 0.5rem 0 to add horizontal padding */
-  display: inline-flex;  /* Changed from inline-block to inline-flex */
+  padding: 0.5rem; 
+  display: inline-flex; 
   align-items: center;
-  gap: 0.5rem;  /* Added gap for spacing between icon and text */
+  gap: 0.5rem;
   width: auto;
   text-decoration: none;
   color: var(--color-text);
@@ -68,7 +68,7 @@
 
 .navLink {
   position: relative;
-  padding: 0.5rem;  /* Updated from 0.5rem 0 to add horizontal padding */
+  padding: 0.5rem;  
   text-align: center;
   transition: all 0.3s ease;
   display: flex;
@@ -103,25 +103,23 @@
   transform: translateY(-2px);
 }
 
-/* Cart content styles */
 .cartContent {
-  padding: 8rem 0 3rem; /* Increased top padding to account for fixed navbar */
+  padding: 8rem 0 3rem; 
   flex: 1;
-  margin-top: 1rem; /* Add some margin at the top */
-}
+  margin-top: 1rem; 
 
 .emptyCart {
   text-align: center;
   padding: 3rem;
   margin: 2rem auto;
   max-width: 800px;
-  border-radius: 12px; /* Add rounded corners to match design */
+  border-radius: 12px; 
 }
 
 .cartItems {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  border-radius: 12px; /* Add rounded corners to match design */
+  border-radius: 12px;
 }
 
 .cartHeader {
@@ -214,7 +212,7 @@
   padding: 1.5rem;
   max-width: 500px;
   margin-left: auto;
-  border-radius: 12px; /* Add rounded corners to match design */
+  border-radius: 12px; 
 }
 
 .summaryRow {

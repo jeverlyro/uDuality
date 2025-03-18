@@ -136,8 +136,8 @@
 }
 
 .footerBottomLinks a {
-  width: fit-content; /* Constrain width to text content */
-  display: inline-flex; /* Control the layout better */
+  width: fit-content;
+  display: inline-flex; 
   align-items: center;
   transition: all 0.25s ease;
   opacity: 0.8;
@@ -150,10 +150,10 @@
 }
 
 .footer a {
-  display: inline-flex; /* Change from flex to inline-flex */
+  display: inline-flex; 
   align-items: center;
   gap: 8px;
-  width: fit-content; /* Make clickable area only as wide as content */
+  width: fit-content;
 }
 
 .footer img {
@@ -167,11 +167,11 @@
 }
 
 .socialIcons a {
-  display: flex; /* Keep this as flex */
+  display: flex; 
   align-items: center;
   justify-content: center;
-  width: 40px; /* Fixed width */
-  height: 40px; /* Fixed height */
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%;
   background-color: rgba(var(--background-start-rgb), 0.1);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -185,7 +185,6 @@
   text-decoration: none !important;
 }
 
-/* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
@@ -261,7 +260,6 @@
   font-family: var(--font-geist-sans);
 }
 
-/* Updated Navigation styles */
 .navLinks {
   display: flex;
   gap: 2rem;
@@ -275,12 +273,10 @@
   transition: all 0.3s ease;
   opacity: 0.85;
   padding: 0.5rem 0;
-  /* Remove extra padding that might extend the clickable area */
   display: inline-block;
   width: auto;
 }
 
-/* Remove the underline hover effect */
 .navLinks a:after {
   display: none;
 }
@@ -290,7 +286,6 @@
   color: var(--foreground);
 }
 
-/* Update sidebar navigation links to match the new style */
 .sidebar .navLinks a {
   position: relative;
   padding: 0.5rem 0;
@@ -303,11 +298,9 @@
   text-decoration: none;
   font-weight: 500;
   width: auto;
-  /* Ensure links don't have extra hit areas */
   box-sizing: content-box;
 }
 
-/* Remove the underline hover effect for sidebar links */
 .sidebar .navLinks a:after {
   display: none;
 }
@@ -319,7 +312,7 @@
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 60px); /* Take full height minus navbar */
+  min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -364,9 +357,7 @@
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.1;
-  /* Fallback color */
   color: var(--foreground);
-  /* Gradient */
   background-image: var(--hero-gradient);
   background-size: 100%;
   background-repeat: no-repeat;
@@ -374,20 +365,9 @@
   -moz-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Add this to help with rendering */
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-family: var(--font-geist-sans);
-}
-
-.heroSubtitle {
-  font-size: clamp(1.125rem, 3vw, 1.5rem);
-  margin-bottom: 1.5rem;
-  color: var(--accent);
-  font-weight: 600;
-  font-family: var(--font-geist-sans);
-  opacity: 0.9;
-  color: var(--text-muted);
 }
 
 .heroDescription {
@@ -428,7 +408,7 @@
   width: 100%;
   height: 300px;
   border-radius: 20px;
-  background-image: url('/hero-image.jpg'); /* Add a placeholder image */
+  background-image: url('/hero-image.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -451,7 +431,6 @@
   font-size: 0.9rem;
 }
 
-/* Responsive styles for hero section */
 @media (max-width: 1024px) {
   .heroContent {
     padding: 2rem;
@@ -538,7 +517,6 @@
   }
 }
 
-/* About Section */
 .about {
   position: relative;
   overflow: visible;
@@ -571,17 +549,17 @@
   gap: 2rem;
   position: relative;
   z-index: 2;
-  padding: 8px; /* Increased padding to prevent hover cutoff */
-  margin: -8px; /* Offset the padding to maintain layout alignment */
+  padding: 8px;
+  margin: -8px;
   overflow: visible;
 }
 
 .membersGrid,
 .galleryGrid,
 .projectsGrid {
-  padding: 8px; /* Consistent padding for all grids */
-  margin: -8px; /* Offset padding */
-  overflow: visible; /* Critical - allow content to overflow */
+  padding: 8px; 
+  margin: -8px;
+  overflow: visible; 
 }
 
 .membersGrid {
@@ -610,7 +588,6 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 
-/* Responsive adjustments for galleries section */
 @media (max-width: 768px) {
   .galleryGrid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -737,19 +714,17 @@
   color: rgba(var(--accent-rgb), 0.8);
 }
 
-/* Gallery Section - Fix hover cutoff issues */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   position: relative;
   z-index: 2;
-  padding: 8px; /* Increase padding to prevent hover cutoff */
-  margin: -8px; /* Offset the padding to maintain layout */
+  padding: 8px; 
+  margin: -8px; 
   overflow: visible;
 }
 
-/* Enhanced Gallery Item Styling */
 .galleryItem {
   border-radius: 16px;
   overflow: hidden;
@@ -762,7 +737,7 @@
   cursor: pointer;
   transform-style: preserve-3d;
   perspective: 1000px;
-  margin: 8px 0; /* Explicit top/bottom margins */
+  margin: 8px 0; 
   transform-origin: center center;
 }
 
@@ -824,7 +799,6 @@
   opacity: 1;
 }
 
-/* Improve grids with better spacing */
 .membersGrid,
 .galleryGrid {
   display: grid;
@@ -843,7 +817,6 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 
-/* Responsive adjustments for galleries section */
 @media (max-width: 768px) {
   .galleryGrid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -876,7 +849,6 @@
   }
 }
 
-/* FAQ Section - Enhanced with smoother animations */
 .faqContainer {
   padding: 2rem;
   border-radius: 8px;
@@ -960,7 +932,6 @@
   transform: translateY(0);
 }
 
-/* Improve hover states */
 .faqItem {
   border-radius: 8px;
   padding: 1.5rem 1rem;
@@ -975,7 +946,7 @@
 
 @media (max-width: 600px) {
   .page {
-    --page-padding: 32px; /* Update the variable for smaller screens */
+    --page-padding: 32px;
     padding: var(--page-padding);
     padding-bottom: 80px;
   }
@@ -987,7 +958,6 @@
   }
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
 
   .navLinks {
@@ -1048,12 +1018,10 @@
   }
 }
 
-/* For headings */
 .section-title {
   font-family: var(--font-geist-sans);
 }
 
-/* Add these styles for the sidebar navigation */
 .sidebar {
   position: fixed;
   top: 0;
@@ -1062,20 +1030,20 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: var(--glass-shadow); /* Lighter shadow for better light mode appearance */
+  box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  background: var(--glass-bg); /* Slightly more opaque for better readability */
-  border-bottom: 1px solid var(--glass-border); /* Subtle border */
+  background: var(--glass-bg); 
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .sidebarContent {
   padding: 0 2rem;
   display: flex;
-  flex-direction: row; /* Changed to row */
+  flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
@@ -1096,12 +1064,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: var(--foreground); /* Explicit color to ensure visibility */
+  color: var(--foreground); 
 }
 
 .sidebar .navLinks {
   display: flex;
-  flex-direction: row; /* Changed to row */
+  flex-direction: row; 
   gap: 1.5rem;
   align-items: center;
 }
@@ -1114,11 +1082,10 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--foreground); /* Ensure text color matches theme */
+  color: var(--foreground);
   text-decoration: none;
   font-weight: 500;
   width: auto;
-  /* Ensure links don't have extra hit areas */
   box-sizing: content-box;
 }
 
@@ -1132,10 +1099,10 @@
 }
 
 .sidebar .navCta {
-  padding: 0.5rem 0.75rem; /* Match other links */
-  background: transparent; /* Remove background */
-  border-radius: 0; /* Remove border radius */
-  color: var(--foreground); /* Use theme color */
+  padding: 0.5rem 0.75rem; 
+  background: transparent; 
+  border-radius: 0; 
+  color: var(--foreground);
 }
 
 .sidebar .navCta:hover {
@@ -1143,22 +1110,20 @@
   opacity: 0.7;
 }
 
-/* Adjust the page layout for the top navbar */
 .page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 0; /* Remove gap between sections */
+  gap: 0; 
   transition: padding 0.3s ease;
   padding: var(--page-padding);
-  padding-top: calc(60px + var(--page-padding)); /* Account for navbar height */
+  padding-top: calc(60px + var(--page-padding));
 }
 
-/* Mobile navigation styles */
 @media (max-width: 768px) {
   .sidebar {
-    top: auto; /* Remove from top */
-    bottom: 0; /* Position at bottom */
+    top: auto;
+    bottom: 0; 
     height: 60px;
     border-top: 1px solid var(--glass-border);
     border-bottom: none;
@@ -1170,7 +1135,7 @@
   }
   
   .sidebar .logoContainer {
-    display: none; /* Hide logo on mobile bottom bar */
+    display: none; 
   }
   
   .sidebar .navLinks {
@@ -1189,32 +1154,28 @@
   }
   
   .themeToggle {
-    display: none; /* Hide theme toggle on mobile */
+    display: none; 
   }
   
-  /* Adjust page padding for bottom navbar */
   .page {
     padding-top: var(--page-padding);
-    padding-bottom: calc(60px + var(--page-padding)); /* Account for navbar height */
+    padding-bottom: calc(60px + var(--page-padding)); 
   }
 
-  /* Hero section bottom margin */
   .hero {
     margin-bottom: 0;
   }
 
-  /* Footer padding */
   .footer {
     padding-bottom: calc(3rem + 60px);
   }
 }
-/* Section background styles */
 .section {
   position: relative;
-  padding: 6rem 0; /* Increased padding */
+  padding: 6rem 0; 
   overflow: visible;
   width: 100%;
-  margin-top: -1px; /* Prevent tiny gaps between sections */
+  margin-top: -1px;
   margin-bottom: -1px;
   background: linear-gradient(
     to bottom,
@@ -1225,10 +1186,9 @@
 
 .section::before,
 .section::after {
-  display: none; /* Remove all background shapes */
+  display: none; 
 }
 
-/* About section styling */
 .about {
   position: relative;
 }
@@ -1238,7 +1198,6 @@
   display: none;
 }
 
-/* Members section styling */
 .members {
   position: relative;
 }
@@ -1248,7 +1207,6 @@
   display: none;
 }
 
-/* Gallery section styling */
 .gallery {
   position: relative;
 }
@@ -1258,7 +1216,6 @@
   display: none;
 }
 
-/* Projects section styling */
 .projects {
   position: relative;
 }
@@ -1268,7 +1225,6 @@
   display: none;
 }
 
-/* FAQ section styling */
 .faq {
   position: relative;
 }
@@ -1278,7 +1234,6 @@
   display: none;
 }
 
-/* Improve glass effect for all sections */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
@@ -1287,7 +1242,6 @@
   color: var(--foreground);
 }
 
-/* Smooth transitions between sections with overlapping content */
 .aboutContent, 
 .faqContainer, 
 .membersGrid, 
@@ -1299,7 +1253,6 @@
   overflow: visible;
 }
 
-/* Create section separators that don't add extra space */
 .sectionSeparator {
   height: 1px;
   background: linear-gradient(90deg, 
@@ -1336,12 +1289,10 @@
   margin-top: 0;
 }
 
-/* Improve spacing between subsections */
 .projectsGrid {
   margin-bottom: 3.5rem;
 }
 
-/* Ensure consistent styling between the two grids */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1384,7 +1335,6 @@
   font-size: 0.9rem;
 }
 
-/* Responsive adjustments for galleries section */
 @media (max-width: 768px) {
   .galleryGrid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1417,7 +1367,6 @@
   }
 }
 
-/* Projects Grid and Cards */
 .projectsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1531,7 +1480,6 @@
   right: 0;
 }
 
-/* Ensure the galleryGrid and projectsGrid are consistent */
 .galleryGrid, 
 .projectsGrid {
   display: grid;
@@ -1543,7 +1491,6 @@
   margin: -1px;
 }
 
-/* Responsive adjustments for project cards */
 @media (max-width: 768px) {
   .projectsGrid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1562,7 +1509,6 @@
   }
 }
 
-/* Add to your Home.module.css file */
 .minecraft {
   padding: 4rem 0;
 }
@@ -1663,7 +1609,6 @@
   border-radius: 0.5rem;
 }
 
-/* Make it responsive */
 @media (max-width: 768px) {
   .minecraftContent {
     grid-template-columns: 1fr;
@@ -1674,9 +1619,6 @@
   }
 }
 
-/* Add these styles to enhance the navbar links and minecraft section */
-
-/* Enhanced Navigation Link Styles */
 .navLink {
   position: relative;
   padding: 0.5rem 0;
@@ -1723,7 +1665,6 @@
   transform: scale(1.2);
 }
 
-/* Improved Minecraft Section */
 .minecraft {
   padding: 5rem 0;
 }
@@ -1895,7 +1836,6 @@
   pointer-events: none;
 }
 
-/* Update responsive styles */
 @media (max-width: 768px) {
   .minecraftContent {
     grid-template-columns: 1fr;
