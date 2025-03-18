@@ -35,7 +35,7 @@ export default function Home() {
         <title>uDuality</title>
         <meta name="description" content="Unleash the Duality" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vector.ico" />
       </Head>
 
       {/* Top/Bottom Navigation */}

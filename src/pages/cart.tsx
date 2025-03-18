@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "@/styles/Cart.module.css";
 import { CartItem } from "./shop";
 // Add icon imports
-import { MdHome, MdCollections} from "react-icons/md";
+import { MdHome, MdShoppingBag} from "react-icons/md";
 import { BsDiscord, BsInstagram } from "react-icons/bs";
 
 export default function Cart() {
@@ -74,9 +74,9 @@ export default function Cart() {
     <>
       <Head>
         <title>Shopping Cart - uDuality</title>
-        <meta name="description" content="Your uDuality shopping cart" />
+        <meta name="description" content="uDuality shopping cart" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vector.ico" />
       </Head>
       <div className={styles.page}>
         {/* Updated Navigation */}
@@ -91,7 +91,7 @@ export default function Cart() {
                 <span>Home</span>
               </Link>
               <Link href="/shop" className={styles.navLink}>
-                <MdCollections size={20} />
+                <MdShoppingBag size={20} />
                 <span>Shop</span>
               </Link>
             </div>

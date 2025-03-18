@@ -21,10 +21,27 @@ export default function Shop() {
   const [currentYear, setCurrentYear] = useState("2025");
   const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
   const [notificationKey, setNotificationKey] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     setIsClient(true);
     setCurrentYear(new Date().getFullYear().toString());
+    
+    // Initialize cart count from localStorage when component mounts
+    if (typeof window !== 'undefined') {
+      try {
+        const cartData = localStorage.getItem('udualityCart');
+        if (cartData) {
+          const cart = JSON.parse(cartData);
+          if (Array.isArray(cart)) {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            setCartCount(totalItems);
+          }
+        }
+      } catch (error) {
+        console.error("Error loading cart count:", error);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -88,6 +105,10 @@ export default function Shop() {
       
       localStorage.setItem('udualityCart', JSON.stringify(cart));
       
+      // Update cart count
+      const newCartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      setCartCount(newCartCount);
+      
       setAddedItem(item.name);
       setNotificationKey(prevKey => prevKey + 1);
       setShowNotification(true);
@@ -104,7 +125,7 @@ export default function Shop() {
         <title>Shop - uDuality</title>
         <meta name="description" content="uDuality shop - Browse our merchandise" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vector.ico" />
       </Head>
       <div className={styles.page}>
         {/* Navigation */}
@@ -119,7 +140,12 @@ export default function Shop() {
                 <span>Home</span>
               </Link>
               <Link href="/cart" className={styles.cartLink}>
-                <MdShoppingCart size={20} />
+                <div className={styles.cartIconWrapper}>
+                  <MdShoppingCart size={20} />
+                  {cartCount > 0 && (
+                    <span className={styles.cartBadge}>{cartCount}</span>
+                  )}
+                </div>
                 <span>Cart</span>
               </Link>
             </div>
