@@ -2,13 +2,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Shop.module.css";
-// Import icons
 import { FaImages, FaTshirt, FaPlus } from 'react-icons/fa';
-// Update to match homepage icons
 import { MdHome, MdShoppingCart } from "react-icons/md";
 import { BsDiscord, BsInstagram } from "react-icons/bs";
 
-// Define the CartItem type
 export interface CartItem {
   id: number;
   name: string;
@@ -23,26 +20,23 @@ export default function Shop() {
   const [addedItem, setAddedItem] = useState("");
   const [currentYear, setCurrentYear] = useState("2025");
   const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
-  const [notificationKey, setNotificationKey] = useState(0); // Add this for animation reset
+  const [notificationKey, setNotificationKey] = useState(0);
 
-  // Set isClient to true when component mounts (client-side only)
   useEffect(() => {
     setIsClient(true);
     setCurrentYear(new Date().getFullYear().toString());
   }, []);
 
-  // Auto-dismiss notification after timeout
   useEffect(() => {
     if (showNotification) {
       const timer = setTimeout(() => {
         setShowNotification(false);
-      }, 5000); // 5 seconds
+      }, 5000);
       
       return () => clearTimeout(timer);
     }
   }, [showNotification]);
 
-  // Handle image loading error
   const handleImageError = (itemId: number) => {
     setImageErrors(prev => ({
       ...prev,
@@ -50,7 +44,6 @@ export default function Shop() {
     }));
   };
 
-  // Product items
   const shopItems = [
     { id: 1, name: "uDuality T-Shirt", price: 25.99, image: "/shop/tshirt.jpg", icon: <FaTshirt /> },
     { id: 2, name: "Logo Sticker Pack", price: 12.50, image: "/shop/stickers.jpg", icon: <FaImages /> },
@@ -64,32 +57,26 @@ export default function Shop() {
     if (!isClient) return;
     
     try {
-      // Get existing cart or create empty array
       let cart: CartItem[] = [];
       
       try {
-        // Safely parse the cart data
         const cartData = localStorage.getItem('udualityCart');
         cart = cartData ? JSON.parse(cartData) : [];
         
-        // Ensure cart is an array
         if (!Array.isArray(cart)) {
           cart = [];
           console.warn("Cart data was invalid, resetting");
         }
       } catch (parseError) {
         console.error("Error parsing cart data:", parseError);
-        cart = []; // Reset if there's a parsing error
+        cart = [];
       }
       
-      // Check if item already exists in cart
       const existingItemIndex = cart.findIndex((cartItem: CartItem) => cartItem.id === item.id);
       
       if (existingItemIndex >= 0) {
-        // Increase quantity if item exists
         cart[existingItemIndex].quantity += 1;
       } else {
-        // Add new item with quantity 1
         cart.push({
           id: item.id,
           name: item.name,
@@ -99,10 +86,8 @@ export default function Shop() {
         });
       }
       
-      // Save updated cart
       localStorage.setItem('udualityCart', JSON.stringify(cart));
       
-      // Show notification and reset animation
       setAddedItem(item.name);
       setNotificationKey(prevKey => prevKey + 1);
       setShowNotification(true);
@@ -146,8 +131,7 @@ export default function Shop() {
           <div className="container">
             <h1 className="section-title">Our Shop</h1>
             <p className={styles.shopIntro}>Browse through our collection of merchandise and support our community.</p>
-            
-            {/* Enhanced notification display with animation */}
+
             {showNotification && (
               <div key={notificationKey} className={styles.notification}>
                 <MdShoppingCart className={styles.notificationIcon} />
@@ -186,8 +170,8 @@ export default function Shop() {
             </div>
           </div>
         </section>
-
-        {/* Footer - Updated to match homepage */}
+          
+          {/* Footer */} 
         <footer className={`${styles.footer} glass`}>
           <div className="container">
             <div className={styles.footerGrid}>
