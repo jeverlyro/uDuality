@@ -1,28 +1,3 @@
-/* Update root variables for dark theme */
-:root {
-  /* Theme variables */
-  --background: #202020;
-  --foreground: #ffffff;
-  --glass-bg: rgba(15, 15, 15, 0.90);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --card-bg: rgba(40, 40, 40, 0.9);
-  --separator: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  --hero-gradient: linear-gradient(45deg, #ffffff, #cccccc);
-  /* Button variables */
-  --button-primary-hover: rgba(255, 255, 255, 0.9);
-  --button-secondary-hover: rgba(255, 255, 255, 0.1);
-  /* RGB variables */
-  --accent-rgb: 255, 255, 255;
-  --primary-rgb: 255, 255, 255;
-  --secondary-rgb: 180, 180, 180;
-  --background-start-rgb: 18, 18, 18;
-  --background-end-rgb: 10, 10, 10;
-  --foreground-rgb: 255, 255, 255;
-  --accent-color: rgba(255, 255, 255, 0.8);
-}
-
 .page {
   --page-padding: 0;
   min-height: 100vh;
@@ -1852,5 +1827,283 @@
   
   .sidebar .navLinks a.navLink svg {
     font-size: 1.25rem;
+  }
+}
+
+/* Modal styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  padding: 1.5rem;
+  opacity: 1;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.cardDetailModal {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 255, 255, 0.05);
+  padding: 0;
+  animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.modalCloseButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg);
+}
+
+.cardDetailContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 100%;
+}
+
+.imageSliderContainer {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.cardDetailImage {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.sliderButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.sliderButtonPrev {
+  left: 15px;
+}
+
+.sliderButtonNext {
+  right: 15px;
+}
+
+.sliderButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.sliderDots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.sliderDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sliderDot.activeDot {
+  background: white;
+  transform: scale(1.2);
+}
+
+.cardDetailInfo {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.cardDetailTitle {
+  font-family: var(--font-geist-sans);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+  background-image: var(--hero-gradient);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cardDetailDescription {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.cardDetailDate,
+.cardDetailLocation {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.techTag {
+  padding: 0.35rem 0.75rem;
+  border-radius: 30px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.cardDetailLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.cardDetailLink,
+.cardDetailGithubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cardDetailLink {
+  background: var(--accent-color);
+  color: white;
+}
+
+.cardDetailGithubLink {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: var(--foreground);
+}
+
+.cardDetailLink:hover,
+.cardDetailGithubLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardDetailContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .imageSliderContainer {
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .cardDetailInfo {
+    border-radius: 0 0 16px 16px;
+  }
+  
+  .modalOverlay {
+    padding: 1rem;
+  }
+  
+  .cardDetailModal {
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardDetailTitle {
+    font-size: 1.5rem;
+  }
+  
+  .cardDetailImage {
+    height: 250px;
+  }
+  
+  .cardDetailInfo {
+    padding: 1.5rem;
+  }
+  
+  .cardDetailLinks {
+    flex-direction: column;
+  }
+  
+  .sliderButton {
+    width: 36px;
+    height: 36px;
   }
 }

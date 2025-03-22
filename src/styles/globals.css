@@ -1,25 +1,31 @@
-/* Import Plus Jakarta Sans */
+
 @import '@fontsource/plus-jakarta-sans/400.css';
 @import '@fontsource/plus-jakarta-sans/500.css';
 @import '@fontsource/plus-jakarta-sans/700.css';
 
-/* Import Geist Sans */
 @import '@fontsource/geist-sans/400.css';
 @import '@fontsource/geist-sans/500.css';
 @import '@fontsource/geist-sans/700.css';
 
 :root {
-  /* Dark mode colors only */
-  --background: #000000;
+  --background: #202020;
   --foreground: #ffffff;
-  --glass-bg: rgba(10, 10, 10, 0.7);
+  --glass-bg: rgba(15, 15, 15, 0.90);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --accent-color: #ffffff;
-  --gradient-start: #000000;
-  --gradient-end: #1a1a1a;
-  --button-text: #000000;
-  --card-bg: rgba(10, 10, 10, 0.8);
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(40, 40, 40, 0.9);
+  --separator: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  --hero-gradient: linear-gradient(45deg, #ffffff, #cccccc);
+  --button-primary-hover: rgba(255, 255, 255, 0.9);
+  --button-secondary-hover: rgba(255, 255, 255, 0.1);
+  --accent-rgb: 255, 255, 255;
+  --primary-rgb: 255, 255, 255;
+  --secondary-rgb: 180, 180, 180;
+  --background-start-rgb: 18, 18, 18;
+  --background-end-rgb: 10, 10, 10;
+  --foreground-rgb: 255, 255, 255;
+  --accent-color: rgba(255, 255, 255, 0.8);
 }
 
 html,

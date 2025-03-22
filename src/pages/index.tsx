@@ -1,17 +1,169 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
-import { useState, useEffect } from "react";
-import { MdHome, MdCollections, MdKeyboardArrowDown, MdShoppingCart, MdKeyboardArrowUp, MdGames } from "react-icons/md"; 
-import { BsDiscord, BsInstagram} from "react-icons/bs";
+import { useState, useEffect, useRef } from "react";
+import { MdHome, MdCollections, MdKeyboardArrowDown, MdShoppingCart, MdKeyboardArrowUp, MdGames, MdClose, MdArrowForward, MdArrowBack } from "react-icons/md"; 
+import { BsDiscord, BsInstagram, BsGithub } from "react-icons/bs";
+
+// Define types for our cards
+interface ProjectCard {
+  id: number;
+  type: 'project';
+  title: string;
+  description: string;
+  fullDescription: string;
+  image: string;
+  images: string[]; // Add this for image slider
+  technologies: string[];
+  link?: string;
+  githubLink?: string; // Add GitHub repository link
+}
+
+interface OutingCard {
+  id: number;
+  type: 'outing';
+  caption: string;
+  fullDescription: string;
+  image: string;
+  images: string[]; // Add this for image slider
+  date: string;
+  location: string;
+}
+
+type CardDetail = ProjectCard | OutingCard;
 
 export default function Home() {
   const [currentYear, setCurrentYear] = useState("2025");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<CardDetail | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Sample project data
+  const projectData: ProjectCard[] = [
+    {
+      id: 1,
+      type: 'project',
+      title: "uDuality Website",
+      description: "Our community website built with Next.js",
+      fullDescription: "A responsive and modern website showcasing our community, built with Next.js, React, and CSS Modules. Features both neumorphism and glassmorphism design elements for a unique aesthetic.",
+      image: "/projects/website.jpg",
+      images: ["/projects/website.jpg", "/projects/website-2.jpg", "/projects/website-3.jpg"],
+      technologies: ["Next.js", "React", "TypeScript", "CSS Modules"],
+      githubLink: "https://github.com/uduality/website"
+    },
+    {
+      id: 2,
+      type: 'project',
+      title: "ML Study Assistant",
+      description: "AI-powered study helper for Computer Science students",
+      fullDescription: "An application that uses machine learning to help CS students optimize their study sessions. Features include smart flashcards, concept mapping, and personalized learning paths.",
+      image: "/projects/ml-assistant.jpg",
+      images: ["/projects/ml-assistant.jpg", "/projects/ml-assistant-2.jpg", "/projects/ml-assistant-3.jpg"],
+      technologies: ["Python", "TensorFlow", "React", "Firebase"],
+      githubLink: "https://github.com/uduality/ml-assistant"
+    },
+    {
+      id: 3,
+      type: 'project',
+      title: "Minecraft Server Mods",
+      description: "Custom plugins for our Minecraft server",
+      fullDescription: "A collection of custom Java plugins developed by our members to enhance the gameplay experience on our community Minecraft server. Includes economy systems, custom events, and quality-of-life improvements.",
+      image: "/projects/minecraft-mods.jpg",
+      images: ["/projects/minecraft-mods.jpg", "/projects/minecraft-mods-2.jpg", "/projects/minecraft-mods-3.jpg"],
+      technologies: ["Java", "Bukkit API", "Spigot"],
+      githubLink: "https://github.com/uduality/minecraft-plugins"
+    }
+  ];
+
+  // Sample outing data
+  const outingData: OutingCard[] = [
+    {
+      id: 1,
+      type: 'outing',
+      caption: "Beach day coding session",
+      fullDescription: "We took our laptops to Manado beach for a change of scenery. Surprisingly productive with the sound of waves in the background!",
+      image: "/outings/beach.jpg",
+      images: ["/outings/beach.jpg", "/outings/beach-2.jpg", "/outings/beach-3.jpg"],
+      date: "June 15, 2024",
+      location: "Manado Beach"
+    },
+    {
+      id: 2,
+      type: 'outing',
+      caption: "Hackathon weekend",
+      fullDescription: "48 hours of coding, energy drinks, and creativity at the annual Klabat University Hackathon. Our team placed second with our project 'EcoTrack'.",
+      image: "/outings/hackathon.jpg",
+      images: ["/outings/hackathon.jpg", "/outings/hackathon-2.jpg", "/outings/hackathon-3.jpg"],
+      date: "March 22-24, 2024",
+      location: "Klabat University Campus"
+    },
+    {
+      id: 3,
+      type: 'outing',
+      caption: "Mountain hiking retreat",
+      fullDescription: "Sometimes you need to disconnect to reconnect. We hiked up Mount Lokon for team bonding and to clear our minds.",
+      image: "/outings/hiking.jpg",
+      images: ["/outings/hiking.jpg", "/outings/hiking-2.jpg", "/outings/hiking-3.jpg"],
+      date: "July 8, 2024",
+      location: "Mount Lokon"
+    },
+    {
+      id: 4,
+      type: 'outing',
+      caption: "Café code review session",
+      fullDescription: "Monthly code review and planning session at our favorite café. We reviewed projects, shared knowledge, and planned upcoming activities.",
+      image: "/outings/cafe.jpg",
+      images: ["/outings/cafe.jpg", "/outings/cafe-2.jpg", "/outings/cafe-3.jpg"],
+      date: "February 5, 2024",
+      location: "Cozy Code Café, Manado"
+    },
+    {
+      id: 5,
+      type: 'outing',
+      caption: "Community outreach program",
+      fullDescription: "Teaching basic programming concepts to high school students as part of our commitment to spreading tech education.",
+      image: "/outings/outreach.jpg",
+      images: ["/outings/outreach.jpg", "/outings/outreach-2.jpg", "/outings/outreach-3.jpg"],
+      date: "April 12, 2024",
+      location: "Manado Public High School"
+    },
+    {
+      id: 6, 
+      type: 'outing',
+      caption: "End of semester celebration",
+      fullDescription: "Celebrating the end of a successful semester with games, food, and planning for future projects.",
+      image: "/outings/celebration.jpg",
+      images: ["/outings/celebration.jpg", "/outings/celebration-2.jpg", "/outings/celebration-3.jpg"],
+      date: "December 20, 2024",
+      location: "uDuality Clubhouse"
+    }
+  ];
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear().toString());
+    
+    // Close modal when clicking outside
+    function handleClickOutside(event: MouseEvent) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setActiveCard(null);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  useEffect(() => {
+    // Prevent scrolling when modal is open
+    if (activeCard) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [activeCard]);
 
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -25,6 +177,31 @@ export default function Home() {
         top: section.offsetTop,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const openCardDetail = (card: CardDetail) => {
+    setActiveCard(card);
+    setCurrentImageIndex(0); // Reset image index when opening a new card
+  };
+
+  const closeCardDetail = () => {
+    setActiveCard(null);
+  };
+
+  const nextImage = () => {
+    if (activeCard) {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === activeCard.images.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (activeCard) {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === 0 ? activeCard.images.length - 1 : prevIndex - 1
+      );
     }
   };
 
@@ -173,15 +350,31 @@ export default function Home() {
             <h2 className="section-title">Our Digital & Real Life Adventures</h2>
             
             {/* Projects Subsection */}
-            <h3 className={styles.gallerySubtitle}>Cool Stuff Weve Built</h3>
+            <h3 className={styles.gallerySubtitle}>Cool Stuff We've Built</h3>
             <div className={styles.projectsGrid}>
               {/* Project cards */}
-              {[1, 2, 3].map((project) => (
-                <div key={project} className={`${styles.projectCard} glass`}>
+              {projectData.map((project) => (
+                <div 
+                  key={project.id} 
+                  className={`${styles.projectCard} glass`}
+                  onClick={() => openCardDetail(project)}
+                >
                   <div className={styles.projectImage}></div>
-                  <h3 className={styles.projectTitle}>Awesome Project</h3>
-                  <p className={styles.projectDescription}>Something cool we made during late-night coding sessions with lots of coffee.</p>
-                  <a href="#" className={styles.projectLink}>Check It Out</a>
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <p className={styles.projectDescription}>{project.description}</p>
+                  <div className={styles.projectLinks}>
+                    {project.link && (
+                      <a 
+                        onClick={(e) => e.stopPropagation()} 
+                        href={project.link} 
+                        className={styles.projectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Check It Out
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -190,10 +383,14 @@ export default function Home() {
             <h3 className={styles.gallerySubtitle}>When We Touch Grass</h3>
             <div className={styles.galleryGrid}>
               {/* Gallery items */}
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div key={item} className={`${styles.galleryItem} glass`}>
+              {outingData.map((outing) => (
+                <div 
+                  key={outing.id} 
+                  className={`${styles.galleryItem} glass`}
+                  onClick={() => openCardDetail(outing)}
+                >
                   <div className={styles.galleryImage}></div>
-                  <p className={styles.galleryCaption}>That time when we werent in front of computers</p>
+                  <p className={styles.galleryCaption}>{outing.caption}</p>
                 </div>
               ))}
             </div>
@@ -224,11 +421,11 @@ export default function Home() {
                 <div className={styles.serverAddressContainer}>
                   <span className={styles.serverAddressLabel}>Server Address:</span>
                   <div className={styles.serverAddressCopy}>
-                    <code className={styles.serverAddress}>mc.uduality.com</code>
+                    <code className={styles.serverAddress}>play.uduality.site</code>
                     <button 
                       className={styles.copyButton}
                       onClick={() => {
-                        navigator.clipboard.writeText("mc.uduality.com");
+                        navigator.clipboard.writeText("play.uduality.site");
                         alert("Server address copied to clipboard!");
                       }}
                     >
@@ -280,6 +477,100 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+     {/* Card Detail Modal */}
+     {activeCard && (
+        <div className={styles.modalOverlay}>
+          <div 
+            ref={modalRef}
+            className={`${styles.cardDetailModal} glass-neumorphic`}
+          >
+            <button className={styles.modalCloseButton} onClick={closeCardDetail}>
+              <MdClose size={24} />
+            </button>
+            
+            <div className={styles.cardDetailContent}>
+              <div className={styles.imageSliderContainer}>
+                <div 
+                  className={styles.cardDetailImage}
+                  style={{ 
+                    backgroundImage: `url(${activeCard.images[currentImageIndex]})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                ></div>
+                
+                {activeCard.images.length > 1 && (
+                  <>
+                    <button 
+                      className={`${styles.sliderButton} ${styles.sliderButtonPrev}`}
+                      onClick={prevImage}
+                      aria-label="Previous image"
+                    >
+                      <MdArrowBack size={19} />
+                    </button>
+                    <button 
+                      className={`${styles.sliderButton} ${styles.sliderButtonNext}`}
+                      onClick={nextImage}
+                      aria-label="Next image"
+                    >
+                      <MdArrowForward size={19} />
+                    </button>
+                    <div className={styles.sliderDots}>
+                      {activeCard.images.map((_, index) => (
+                        <button 
+                          key={index}
+                          className={`${styles.sliderDot} ${currentImageIndex === index ? styles.activeDot : ''}`}
+                          onClick={() => setCurrentImageIndex(index)}
+                          aria-label={`Go to image ${index + 1}`}
+                        ></button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              <div className={styles.cardDetailInfo}>
+                {activeCard.type === 'project' ? (
+                  <>
+                    <h2 className={styles.cardDetailTitle}>{activeCard.title}</h2>
+                    <p className={styles.cardDetailDescription}>{activeCard.fullDescription}</p>
+                    <div className={styles.techTags}>
+                      {activeCard.technologies.map((tech, index) => (
+                        <span key={index} className={styles.techTag}>{tech}</span>
+                      ))}
+                    </div>
+                    <div className={styles.cardDetailLinks}>
+                      {activeCard.link && (
+                        <a href={activeCard.link} className={styles.cardDetailLink} target="_blank" rel="noopener noreferrer">
+                          View Project
+                        </a>
+                      )}
+                      {activeCard.githubLink && (
+                        <a href={activeCard.githubLink} className={styles.cardDetailGithubLink} target="_blank" rel="noopener noreferrer">
+                          <BsGithub size={20} />
+                          <span>View Code</span>
+                        </a>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2 className={styles.cardDetailTitle}>{activeCard.caption}</h2>
+                    <p className={styles.cardDetailDate}>
+                      <strong>Date:</strong> {activeCard.date}
+                    </p>
+                    <p className={styles.cardDetailLocation}>
+                      <strong>Location:</strong> {activeCard.location}
+                    </p>
+                    <p className={styles.cardDetailDescription}>{activeCard.fullDescription}</p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
